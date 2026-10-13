@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="FUJI">
+  <rect width="64" height="64" fill="#26382F"/>
+  <path d="M12 44 L32 18 L52 44 Z" fill="none" stroke="#F4F1E9" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M24 30 L32 20 L40 30" fill="none" stroke="#D8CCB8" stroke-width="2"/>
+  <line x1="32" y1="18" x2="32" y2="52" stroke="#F4F1E9" stroke-width="2.4"/>
+</svg>

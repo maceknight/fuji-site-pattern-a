@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>お問い合わせ｜株式会社富士 FUJI co.,LTD.</title>
+<meta name="description" content="製品・導入・お見積り・カタログ請求などのお問い合わせはこちらから。株式会社富士。">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="株式会社富士">
+<meta property="og:title" content="お問い合わせ｜株式会社富士 FUJI co.,LTD.">
+<meta property="og:description" content="製品・導入・お見積り・カタログ請求などのお問い合わせはこちらから。株式会社富士。">
+<meta property="og:image" content="images/site/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="css/mockup-style.css">
+<link rel="stylesheet" href="css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"株式会社富士","alternateName":"FUJI co.,LTD.","url":"","telephone":"0467-44-3000","faxNumber":"0467-47-5278","foundingDate":"1873","address":{"@type":"PostalAddress","postalCode":"247-0063","addressCountry":"JP","addressRegion":"神奈川県","streetAddress":"鎌倉市梶原1-19-2"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TOP","item":"index.php"},{"@type":"ListItem","position":2,"name":"お問い合わせ","item":"contact.php"}]}</script>
+</head>
+<body class="">
+
+<nav class="site-nav">
+    <a class="nav-logo" href="index.html">FUJI co.,LTD.</a>
+    <ul class="nav-links">
+                    <li>
+                <a href="products.html">
+                    製品                </a>
+            </li>
+                    <li>
+                <a href="catalog.html">
+                    カタログ                </a>
+            </li>
+                    <li>
+                <a href="company.html">
+                    会社情報                </a>
+            </li>
+                    <li>
+                <a href="contact.html" class="active">
+                    お問い合わせ                </a>
+            </li>
+            </ul>
+    <button type="button" class="nav-toggle" id="navToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="nav-drawer" id="navDrawer" hidden>
+    <ul>
+                    <li><a href="products.html">製品</a></li>
+                    <li><a href="catalog.html">カタログ</a></li>
+                    <li><a href="company.html">会社情報</a></li>
+                    <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+</div>
+
+<div class="page-body">
+
+    <section class="contact-hero">
+        <p class="contact-hero-label">Contact</p>
+        <h1 class="contact-hero-title">お問い合わせ</h1>
+        <p class="contact-hero-sub">
+            製品のご相談、お見積り、プリント版カタログのご請求など、お気軽にお問い合わせください。<br>
+            内容によっては、お返事までお時間をいただく場合がございます。
+        </p>
+    </section>
+
+    <section class="contact-body">
+        <div class="contact-form-wrap">
+
+            
+                
+                <p class="contact-required-note"><span>*</span> は必須項目です。</p>
+
+                <form method="post" action="contact.html" novalidate>
+                    <input type="hidden" name="csrf_token" value="6a69a49c6c58180d2539f353d70e19b828fd4817dab5f75a124d3a0ced79502a">                    <div class="cf-honeypot" aria-hidden="true">
+                        <label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+                    </div>
+
+                    <table class="contact-form-table">
+                        <tbody>
+                        <tr>
+                            <th><label for="cf-subject">ご用件</label><span class="cf-required">*</span></th>
+                            <td>
+                                <select class="cf-select" id="cf-subject" name="subject" required>
+                                    <option value="">選択してください</option>
+                                                                            <option value="製品について">
+                                            製品について                                        </option>
+                                                                            <option value="カタログ請求（プリント版）">
+                                            カタログ請求（プリント版）                                        </option>
+                                                                            <option value="導入・お見積りのご相談">
+                                            導入・お見積りのご相談                                        </option>
+                                                                            <option value="修理・部品について">
+                                            修理・部品について                                        </option>
+                                                                            <option value="取材・その他">
+                                            取材・その他                                        </option>
+                                                                    </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="cf-company">会社名</label></th>
+                            <td><input class="cf-input" id="cf-company" name="company" type="text"
+                                       value="" autocomplete="organization"
+                                       placeholder="株式会社◯◯"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="cf-name">ご担当者（お客様）氏名</label><span class="cf-required">*</span></th>
+                            <td><input class="cf-input" id="cf-name" name="name" type="text"
+                                       value="" required autocomplete="name"
+                                       placeholder="富士 太郎"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="cf-kana">ご担当者（お客様）ふりがな</label><span class="cf-required">*</span></th>
+                            <td><input class="cf-input" id="cf-kana" name="name_kana" type="text"
+                                       value="" required
+                                       placeholder="ふじ たろう"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="cf-tel">電話番号</label><span class="cf-required">*</span></th>
+                            <td><input class="cf-input cf-input--half" id="cf-tel" name="tel" type="tel"
+                                       value="" required autocomplete="tel"
+                                       placeholder="0467-00-0000"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="cf-fax">FAX</label></th>
+                            <td><input class="cf-input cf-input--half" id="cf-fax" name="fax" type="tel"
+                                       value="" placeholder="0467-00-0000"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="cf-email">Eメール</label><span class="cf-required">*</span></th>
+                            <td><input class="cf-input" id="cf-email" name="email" type="email"
+                                       value="" required autocomplete="email"
+                                       placeholder="info@example.com"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="cf-zip">郵便番号</label><span class="cf-required">*</span></th>
+                            <td><input class="cf-input cf-input--half" id="cf-zip" name="postal_code" type="text"
+                                       value="" required autocomplete="postal-code"
+                                       placeholder="247-0063"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="cf-address">ご住所</label><span class="cf-required">*</span></th>
+                            <td><input class="cf-input" id="cf-address" name="address" type="text"
+                                       value="" required autocomplete="street-address"
+                                       placeholder="神奈川県鎌倉市梶原1-19-2"></td>
+                        </tr>
+                        <tr>
+                            <th><label for="cf-industry">業種</label></th>
+                            <td>
+                                <select class="cf-select" id="cf-industry" name="industry">
+                                    <option value="">選択してください</option>
+                                                                            <option value="ホテル・旅館">
+                                            ホテル・旅館                                        </option>
+                                                                            <option value="レストラン・カフェ">
+                                            レストラン・カフェ                                        </option>
+                                                                            <option value="商業施設">
+                                            商業施設                                        </option>
+                                                                            <option value="レジャー・スポーツ施設">
+                                            レジャー・スポーツ施設                                        </option>
+                                                                            <option value="設計事務所・建設会社">
+                                            設計事務所・建設会社                                        </option>
+                                                                            <option value="官公庁・学校・公共施設">
+                                            官公庁・学校・公共施設                                        </option>
+                                                                            <option value="商社・問屋・販売店">
+                                            商社・問屋・販売店                                        </option>
+                                                                            <option value="その他">
+                                            その他                                        </option>
+                                                                    </select>
+                                <span class="cf-note">法人のお客様のみご入力ください。</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><label for="cf-message">お問い合わせ内容</label><span class="cf-required">*</span></th>
+                            <td><textarea class="cf-textarea" id="cf-message" name="message" required
+                                          placeholder="ご検討中の製品、設置場所、数量、ご希望の納期などをご記入ください。"></textarea></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="contact-submit-wrap">
+                        <button type="submit" class="contact-submit-btn">送信する</button>
+                    </div>
+                </form>
+
+                <div class="contact-info">
+                    お電話でのお問い合わせ：<strong>0467-44-3000</strong>（代表）<br>
+                    〒247-0063　神奈川県鎌倉市梶原1-19-2                </div>
+                    </div>
+    </section>
+
+</div>
+
+<footer>
+    <div class="footer-logo">FUJI</div>
+    <div class="footer-links">
+                    <a href="products.html">製品</a>
+                    <a href="catalog.html">カタログ</a>
+                    <a href="company.html">会社情報</a>
+                    <a href="contact.html">お問い合わせ</a>
+            </div>
+    <div class="footer-address">
+        〒247-0063　神奈川県鎌倉市梶原1-19-2<br>
+        TEL 0467-44-3000（代表）　FAX 0467-47-5278    </div>
+    <div class="footer-copy">&copy; 2026 FUJI co.,LTD. All rights reserved.</div>
+</footer>
+
+<!-- お知らせモーダル -->
+<div class="news-modal-bg" id="newsModalBg">
+    <div class="news-modal">
+        <button type="button" class="news-modal-close" id="newsModalClose" aria-label="閉じる">×</button>
+        <div class="news-modal-meta">
+            <span class="news-modal-date" id="newsModalDate"></span>
+            <span class="news-modal-tag" id="newsModalTag"></span>
+        </div>
+        <h3 class="news-modal-title" id="newsModalTitle"></h3>
+        <div class="news-modal-body" id="newsModalBody"></div>
+        <a class="news-modal-link" id="newsModalLink" href="#" target="_blank" rel="noopener" hidden>詳しく見る →</a>
+    </div>
+</div>
+
+<script src="js/main.js" defer></script>
+<div id="staticPreviewNote" style="position:fixed;left:12px;bottom:12px;z-index:3000;max-width:300px;
+  background:#1a1a18;color:#c8b89a;font:11px/1.7 'Noto Sans JP',sans-serif;letter-spacing:.04em;
+  padding:9px 14px;border:1px solid #c8b89a;opacity:.94;">
+  見た目確認用のプレビューです。<br>検索・絞り込み・お問い合わせ・管理画面は動きません。
+  <button type="button" onclick="this.parentNode.remove()" aria-label="閉じる"
+    style="background:none;border:none;color:#c8b89a;cursor:pointer;margin-left:6px;font-size:13px;">×</button>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // 静的なコピーではフォームはどれも送れない（検索も、お問い合わせも）
+  document.querySelectorAll('form input, form select, form textarea, form button')
+    .forEach(function (el) { el.disabled = true; el.title = '見た目確認用のため、動きません'; });
+});
+</script>
+</body>
+</html>
