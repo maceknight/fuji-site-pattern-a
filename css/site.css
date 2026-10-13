@@ -196,6 +196,9 @@ footer {
 .brand-header {
     padding: 80px 48px 24px; max-width: 1100px; margin: 0 auto;
 }
+/* パンくずの下線（商品詳細ページの帯の名残）と、すぐ下の「BRAND ──」の罫線が
+   二重線に見えていたので、ブランドページではパンくずの下線を外す（先方の指摘） */
+.brand-header .pd-breadcrumb { border-bottom: none; background: none; padding-left: 0; padding-right: 0; }
 .brand-header-row {
     display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
 }
@@ -449,6 +452,21 @@ button.pd-variation-icon-item {
    元テーマの枠は文字の表紙用で、内側の余白とグラデーションがあるため、
    写真のときは余白を外して枠いっぱいに出し、かぶせのグラデーションも消す。
    枠は 1:1.42（A4）で、表紙画像と同じ比率なので切れはほぼ出ない。 */
+/* カタログページ上端の縦線（元テーマの .cat-hero::before）は消す（先方の要望）。
+   線のぶん（56px）上の余白を詰め、「WEBカタログを見る」が最初の画面に収まるようにする */
+.cat-hero::before { display: none; }
+.cat-hero { padding-top: 48px; }
+/* 表紙は画面の高さに合わせて縮め、その下の「WEBカタログを見る」まで最初の画面に入れる。
+   表紙の上（ヘッダー＋見出し帯＋余白）が約230px、表紙の下からボタンの下端まで約100px、
+   下に20px残す → 表紙の高さ = 100vh − 350px。幅は A4 の比率（1:1.42）から逆算。
+   大きい画面では元テーマの 400px、低い画面でも 240px より小さくはしない */
+@media (min-width: 769px) {
+    .cat-hero-cover { width: clamp(240px, calc((100vh - 350px) / 1.42), 400px); }
+}
+@media (max-width: 768px) {
+    .cat-hero { padding-top: 32px; }
+}
+
 .cat-hero-cover--photo { padding: 0; background: var(--paper); }
 .cat-hero-cover--photo::before { display: none; }
 .cat-hero-cover-photo {
