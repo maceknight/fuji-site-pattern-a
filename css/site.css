@@ -175,8 +175,8 @@ footer {
 }
 .search-wrap form { display: block; }
 
-.scroll-thumb--contain img,
-.product-thumb--contain img {
+.scroll-thumb--contain > img,
+.product-thumb--contain > img {
     width: 100%; height: 100%; object-fit: contain; display: block;
 }
 .scroll-thumb--logo,
@@ -550,12 +550,12 @@ button.pd-variation-icon-item {
    ブランドのある商品は、上の帯をロゴ用に空けて、写真はその下に収める（先方のアプリと同じ並び）。
    ロゴの枠は元テーマの 50%×33% だと帯が太くなりすぎるので、高さだけ詰める。 */
 .has-brand .product-brand-tag--logo { height: 17%; }
-.scroll-thumb--contain.has-brand img,
-.product-thumb--contain.has-brand img {
+.scroll-thumb--contain.has-brand > img,
+.product-thumb--contain.has-brand > img {
     position: absolute; left: 5%; top: 30%; width: 90%; height: 66%;
 }
 /* ブランドページでは帯ごと要らない（ロゴを出していないので） */
-.brand-page-grid .product-thumb--contain.has-brand img { position: absolute; left: 7%; top: 7%; width: 86%; height: 86%; }
+.brand-page-grid .product-thumb--contain.has-brand > img { position: absolute; left: 7%; top: 7%; width: 86%; height: 86%; }
 
 /* ── 一覧サムネイル：写真のある枠は内側を白に ──
    商品写真はほぼ白背景なので、生成りの枠の中に白い四角が浮いて中途半端に見えていた（先方の指摘）。
@@ -572,11 +572,19 @@ button.pd-variation-icon-item {
 }
 /* 写真が枠いっぱいだと、白い縁が生成りの線に被って線が途切れて見える。周りに少し余白を取る
    （ブランドのある枠は、上の帯の分を空けた別の指定が後ろ＝上で効く） */
-.scroll-thumb--contain img,
-.product-thumb--contain img {
+.scroll-thumb--contain > img,
+.product-thumb--contain > img {
     position: absolute; left: 7%; top: 7%; width: 86%; height: 86%;
 }
-.scroll-thumb--contain.has-brand img,
-.product-thumb--contain.has-brand img {
+.scroll-thumb--contain.has-brand > img,
+.product-thumb--contain.has-brand > img {
     left: 7%; top: 30%; width: 86%; height: 63%;
 }
+
+/* 縦長のロゴ（tesoro）：横長前提の枠だと高さで縮んで豆粒になり、枠の中央に寄って位置もずれていた。
+   ロゴ帯（写真の上 30%）の高さいっぱいを使い、ほかのロゴと同じく左上に揃える */
+.has-brand .product-brand-tag--tall { height: calc(30% - 10px); width: auto; aspect-ratio: 2 / 3; }
+.product-brand-tag--tall .product-brand-tag-inner img { height: 100%; width: auto; }
+/* 縦長のロゴは、ブランドページの見出しでは高さを取り、製品一覧の Brand 行では横長のロゴと釣り合う大きさに */
+.brand-header-logo--tall { height: 120px; }
+.scroll-thumb--logo-tall img { max-height: 56%; }
