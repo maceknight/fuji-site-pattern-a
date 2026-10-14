@@ -555,7 +555,7 @@ button.pd-variation-icon-item {
     position: absolute; left: 5%; top: 30%; width: 90%; height: 66%;
 }
 /* ブランドページでは帯ごと要らない（ロゴを出していないので） */
-.brand-page-grid .product-thumb--contain.has-brand img { position: static; width: 100%; height: 100%; }
+.brand-page-grid .product-thumb--contain.has-brand img { position: absolute; left: 7%; top: 7%; width: 86%; height: 86%; }
 
 /* ── 一覧サムネイル：写真のある枠は内側を白に ──
    商品写真はほぼ白背景なので、生成りの枠の中に白い四角が浮いて中途半端に見えていた（先方の指摘）。
@@ -569,4 +569,14 @@ button.pd-variation-icon-item {
 .product-card:hover .product-thumb--contain {
     background: #fff;
     box-shadow: inset 0 0 0 1px var(--stone);
+}
+/* 写真が枠いっぱいだと、白い縁が生成りの線に被って線が途切れて見える。周りに少し余白を取る
+   （ブランドのある枠は、上の帯の分を空けた別の指定が後ろ＝上で効く） */
+.scroll-thumb--contain img,
+.product-thumb--contain img {
+    position: absolute; left: 7%; top: 7%; width: 86%; height: 86%;
+}
+.scroll-thumb--contain.has-brand img,
+.product-thumb--contain.has-brand img {
+    left: 7%; top: 30%; width: 86%; height: 63%;
 }
