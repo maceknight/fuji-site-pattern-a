@@ -126,6 +126,10 @@
                                                 <div class="pd-variation-section">
                     <div class="pd-spec-heading-row">
                         <p class="pd-custom-options-heading" style="margin-bottom:0;">バリエーション</p>
+                                                <div class="pva-switch" role="group" aria-label="バリエーションの見せ方">
+                            <button type="button" data-mode="1" aria-pressed="true">A案(1) 一覧</button>
+                            <button type="button" data-mode="2" aria-pressed="false">A案(2) アプリ型</button>
+                        </div>
                     </div>
                     <div class="pd-variation-accordion pd-variation-expanded" id="pdVariationWrap">
                         <div class="pd-variation-inner">
@@ -150,6 +154,37 @@
                                                                     </div>
                                                     </div>
                     </div>
+                    <div class="pva" id="pdPicker" hidden>
+    <div class="pva-head">
+        <p class="pva-summary" id="pdPickerSummary">項目を選ぶと、左の写真が替わります（ダブルクリックで拡大）</p>
+        <button type="button" class="pva-reset" id="pdPickerReset">選択をリセット</button>
+    </div>
+
+    
+                    <div class="pva-step">
+            <p class="pva-label">
+                ①天幕カラー                            </p>
+            <div class="pva-opts">
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="赤"
+                            data-img=""
+                            data-color="#b81f2a"
+                                                                                    >
+                                                    <span class="pva-swatch" style="background:#b81f2a"></span>
+                                                赤                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="ウグイス"
+                            data-img=""
+                            data-color="#8a9145"
+                                                                                    >
+                                                    <span class="pva-swatch" style="background:#8a9145"></span>
+                                                ウグイス                    </button>
+                            </div>
+        </div>
+    
+    </div>
                 </div>
                             
             <!-- バリエーションの拡大表示 -->

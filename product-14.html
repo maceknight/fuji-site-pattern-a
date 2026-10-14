@@ -128,6 +128,10 @@
                                                 <div class="pd-variation-section">
                     <div class="pd-spec-heading-row">
                         <p class="pd-custom-options-heading" style="margin-bottom:0;">バリエーション</p>
+                                                <div class="pva-switch" role="group" aria-label="バリエーションの見せ方">
+                            <button type="button" data-mode="1" aria-pressed="true">A案(1) 一覧</button>
+                            <button type="button" data-mode="2" aria-pressed="false">A案(2) アプリ型</button>
+                        </div>
                     </div>
                     <div class="pd-variation-accordion pd-variation-expanded" id="pdVariationWrap">
                         <div class="pd-variation-inner">
@@ -178,6 +182,93 @@
                                                                     </div>
                                                     </div>
                     </div>
+                    <div class="pva" id="pdPicker" hidden>
+    <div class="pva-head">
+        <p class="pva-summary" id="pdPickerSummary">項目を選ぶと、左の写真が替わります（ダブルクリックで拡大）</p>
+        <button type="button" class="pva-reset" id="pdPickerReset">選択をリセット</button>
+    </div>
+
+    
+                    <div class="pva-step">
+            <p class="pva-label">
+                ①フレームカラー                            </p>
+            <div class="pva-opts">
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="木目調"
+                            data-img=""
+                            data-color="#a97c4f"
+                                                                                    >
+                                                    <span class="pva-swatch" style="background:#a97c4f"></span>
+                                                木目調                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="ブラック"
+                            data-img=""
+                            data-color="#1c1c1c"
+                                                                                    >
+                                                    <span class="pva-swatch" style="background:#1c1c1c"></span>
+                                                ブラック                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="シルバー"
+                            data-img=""
+                            data-color="#c3c3c0"
+                                                                                    >
+                                                    <span class="pva-swatch" style="background:#c3c3c0"></span>
+                                                シルバー                    </button>
+                            </div>
+        </div>
+                    <div class="pva-step">
+            <p class="pva-label">
+                ②天幕カラー                            </p>
+            <div class="pva-opts">
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="Canvas"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                Canvas                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="Heather Beige"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                Heather Beige                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="Slate"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                Slate                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="Black"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                Black                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="Jockey Red"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                Jockey Red                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="Forest Green"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                Forest Green                    </button>
+                            </div>
+        </div>
+    
+    </div>
                 </div>
                             
             <!-- バリエーションの拡大表示 -->

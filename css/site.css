@@ -477,3 +477,71 @@ button.pd-variation-icon-item {
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
 }
 .cat-supp-cover { position: relative; overflow: hidden; }
+
+/* ── 一覧サムネイル右下の色数（「custom colors」「2 colors」）──
+   先方の商品データ入力アプリと同じ見せ方。中身は colorBadges()（config/queries.php）で決まる */
+.product-colors {
+    position: absolute; right: 4px; bottom: 4px; z-index: 1;
+    padding: 2px 7px; border-radius: 999px;
+    background: rgba(26, 26, 24, .72); color: #fff;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 9px; line-height: 1.4;
+    letter-spacing: .02em; white-space: nowrap; pointer-events: none;
+}
+.product-thumb .product-colors { right: 5px; bottom: 5px; font-size: 10px; }
+
+/* ── ごあいさつ：写真の枠の代わりにトレードマーク「富士蝶印」──
+   現行サイト（fuji-kamakura.co.jp/company/）と同じく、本文の左に小さく置く。
+   元画像が 120x79 しかないので、拡大せず原寸で出す */
+.about-message-img.about-message-img--mark {
+    aspect-ratio: auto; background: none; overflow: visible;
+    padding-top: 6px; text-align: center;
+}
+.about-message-img--mark img { display: inline-block; width: 120px; height: auto; }
+@media (max-width: 768px) {
+    .about-message-img.about-message-img--mark { aspect-ratio: auto; text-align: left; padding-top: 0; }
+}
+
+/* ── バリエーションのアプリ版（A案(2)）──────────────
+   components/variation-picker.php ／ js/main.js の initPicker()。
+   先方のアプリの画面（修正希望 PDF 3ページ目）の並びに合わせ、色と書体はサイトのものを使う */
+.pd-variation-accordion[hidden], .pva[hidden], .pva-step[hidden] { display: none !important; }
+
+.pva-switch { display: inline-flex; border: 1px solid var(--fog); border-radius: 2px; overflow: hidden; }
+.pva-switch button {
+    padding: 3px 10px; border: none; background: #fff; cursor: pointer;
+    font-family: inherit; font-size: 10px; letter-spacing: .04em; color: var(--stone);
+}
+.pva-switch button + button { border-left: 1px solid var(--fog); }
+.pva-switch button[aria-pressed="true"] { background: var(--ink); color: var(--warm); }
+
+.pva { margin-top: 4px; }
+.pva-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 8px 10px; margin-bottom: 14px; background: var(--paper-dark);
+}
+.pva-summary { font-size: 11px; color: var(--stone); line-height: 1.6; }
+.pva-reset {
+    flex-shrink: 0; padding: 3px 10px; border: 1px solid var(--stone); border-radius: 14px;
+    background: #fff; cursor: pointer; font-family: inherit; font-size: 10px; color: var(--ink);
+}
+.pva-step { margin-bottom: 16px; }
+.pva-label { font-size: 12px; color: var(--ink); margin-bottom: 8px; letter-spacing: .04em; }
+.pva-note, .pva-mark { font-size: 10px; color: var(--stone); }
+.pva-opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px; }
+.pva-opt {
+    display: flex; align-items: center; gap: 6px; min-height: 30px; padding: 4px 10px;
+    border: 1px solid var(--fog); border-radius: 15px; background: #fff; cursor: pointer;
+    font-family: inherit; font-size: 11px; color: var(--ink); text-align: left; line-height: 1.3;
+    transition: border-color .15s, background .15s;
+}
+.pva-opt:hover { border-color: var(--stone); }
+.pva-opt[aria-pressed="true"] { border-color: var(--ink); background: var(--paper-dark); box-shadow: inset 0 0 0 1px var(--ink); }
+.pva-opt:disabled { background: #ece9e3; color: #aaa49b; border-color: #e0dbd2; cursor: not-allowed; box-shadow: none; }
+.pva-opt:disabled .pva-swatch { opacity: .4; }
+.pva-swatch {
+    width: 16px; height: 16px; border-radius: 3px; flex-shrink: 0; object-fit: cover;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); display: inline-block;
+}
+/* 差し替えた写真は色見本や生地の写真なので、切らずに白地に収める */
+.pd-gallery-main.pva-variant { background: #fff; }
+.pd-gallery-main.pva-variant img { object-fit: contain; }

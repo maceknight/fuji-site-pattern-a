@@ -174,6 +174,10 @@
                                 <div class="pd-variation-section">
                     <div class="pd-spec-heading-row">
                         <p class="pd-custom-options-heading" style="margin-bottom:0;">バリエーション</p>
+                                                <div class="pva-switch" role="group" aria-label="バリエーションの見せ方">
+                            <button type="button" data-mode="1" aria-pressed="true">A案(1) 一覧</button>
+                            <button type="button" data-mode="2" aria-pressed="false">A案(2) アプリ型</button>
+                        </div>
                     </div>
                     <div class="pd-variation-accordion pd-variation-expanded" id="pdVariationWrap">
                         <div class="pd-variation-inner">
@@ -272,6 +276,397 @@
                                                                     </div>
                                                     </div>
                     </div>
+                    <div class="pva" id="pdPicker" hidden>
+    <div class="pva-head">
+        <p class="pva-summary" id="pdPickerSummary">項目を選ぶと、左の写真が替わります（ダブルクリックで拡大）</p>
+        <button type="button" class="pva-reset" id="pdPickerReset">選択をリセット</button>
+    </div>
+
+            <div class="pva-step" data-step="lineup">
+            <p class="pva-label">①シリーズ</p>
+            <div class="pva-opts">
+                                    <button type="button" class="pva-opt" data-kind="lineup"
+                            data-shape="round"
+                            data-label="SY-2500"
+                            data-img="">SY-2500</button>
+                                    <button type="button" class="pva-opt" data-kind="lineup"
+                            data-shape="round"
+                            data-label="SY-2000"
+                            data-img="">SY-2000</button>
+                                    <button type="button" class="pva-opt" data-kind="lineup"
+                            data-shape="square"
+                            data-label="SY-2020"
+                            data-img="">SY-2020</button>
+                            </div>
+        </div>
+    
+                    <div class="pva-step">
+            <p class="pva-label">
+                ②フレームカラー                                    <span class="pva-note">（※はオプション）</span>
+                            </p>
+            <div class="pva-opts">
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="シルバー"
+                            data-img=""
+                            data-color="#c3c3c0"
+                                                                                    >
+                                                    <span class="pva-swatch" style="background:#c3c3c0"></span>
+                                                シルバー                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="ブラウン"
+                            data-img=""
+                            data-color="#5a3f2c"
+                                                                                    >
+                                                    <span class="pva-swatch" style="background:#5a3f2c"></span>
+                                                ブラウン                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="ブラック"
+                            data-img=""
+                            data-color="#1c1c1c"
+                                                                                    >
+                                                    <span class="pva-swatch" style="background:#1c1c1c"></span>
+                                                ブラック                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="木目調"
+                            data-img=""
+                            data-color="#a97c4f"
+                                                                                    >
+                                                    <span class="pva-swatch" style="background:#a97c4f"></span>
+                                                木目調 <span class="pva-mark">※</span>                    </button>
+                            </div>
+        </div>
+                    <div class="pva-step">
+            <p class="pva-label">
+                ③天幕仕様                                    <span class="pva-note">（※はオプション、8角形のみ対応可）</span>
+                            </p>
+            <div class="pva-opts">
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="スタンダードタイプ"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                スタンダードタイプ                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="耐風タイプ"
+                            data-img=""
+                            data-color=""
+                                                                                    data-requires="round">
+                                                耐風タイプ <span class="pva-mark">※</span>                    </button>
+                            </div>
+        </div>
+                    <div class="pva-step">
+            <p class="pva-label">
+                ④タレ形状                                    <span class="pva-note">（※はオプション）</span>
+                            </p>
+            <div class="pva-opts">
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="なし"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                なし                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="スタンダード型"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                スタンダード型 <span class="pva-mark">※</span>                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="ウェーブ型"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                ウェーブ型 <span class="pva-mark">※</span>                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="カーブ型"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                カーブ型 <span class="pva-mark">※</span>                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="value"
+                            data-label="ブリーツ"
+                            data-img=""
+                            data-color=""
+                                                                                    >
+                                                ブリーツ <span class="pva-mark">※</span>                    </button>
+                            </div>
+        </div>
+                    <div class="pva-step">
+            <p class="pva-label">
+                ⑤天幕種類                                    <span class="pva-note">（種類により価格が異なります）</span>
+                            </p>
+            <div class="pva-opts">
+                                                        <button type="button" class="pva-opt"
+                            data-kind="fabric"
+                            data-label="PARA"
+                            data-img=""
+                            data-color=""
+                            data-fabric="1"                            data-href="fabric-para-tempotest-forza.html"                            >
+                                                PARA                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="fabric"
+                            data-label="サマーシールド標準"
+                            data-img=""
+                            data-color=""
+                            data-fabric="3"                            data-href="fabric-summer-shield.html"                            >
+                                                サマーシールド標準                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="fabric"
+                            data-label="サマーシールド防炎"
+                            data-img=""
+                            data-color=""
+                            data-fabric="3"                            data-href="fabric-summer-shield.html"                            >
+                                                サマーシールド防炎                    </button>
+                                                        <button type="button" class="pva-opt"
+                            data-kind="fabric"
+                            data-label="ソルテリア"
+                            data-img=""
+                            data-color=""
+                            data-fabric="4"                            data-href="fabric-solteria.html"                            >
+                                                ソルテリア                    </button>
+                            </div>
+        </div>
+    
+                                <div class="pva-step pva-step--colors" data-for-fabric="1" hidden>
+                <p class="pva-label">
+                    ⑥天幕カラー
+                    <span class="pva-note">（PARA（TEMPOTEST FORZA）・19色）</span>
+                </p>
+                <div class="pva-opts pva-opts--colors">
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ホワイト"
+                                data-img="uploads/fabrics/para-01.jpg"
+                                data-color="#f2f0eb">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-01_thumb.jpg" alt="" loading="lazy">
+                                                        ホワイト                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ベージュ"
+                                data-img="uploads/fabrics/para-02.jpg"
+                                data-color="#ddcfb4">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-02_thumb.jpg" alt="" loading="lazy">
+                                                        ベージュ                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="イエロー"
+                                data-img="uploads/fabrics/para-03.jpg"
+                                data-color="#f2b21c">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-03_thumb.jpg" alt="" loading="lazy">
+                                                        イエロー                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="オレンジ"
+                                data-img="uploads/fabrics/para-04.jpg"
+                                data-color="#e8741b">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-04_thumb.jpg" alt="" loading="lazy">
+                                                        オレンジ                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="レッド"
+                                data-img="uploads/fabrics/para-05.jpg"
+                                data-color="#b81f2a">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-05_thumb.jpg" alt="" loading="lazy">
+                                                        レッド                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ピンク"
+                                data-img="uploads/fabrics/para-06.jpg"
+                                data-color="#e98d86">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-06_thumb.jpg" alt="" loading="lazy">
+                                                        ピンク                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ワイン"
+                                data-img="uploads/fabrics/para-07.jpg"
+                                data-color="#78212b">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-07_thumb.jpg" alt="" loading="lazy">
+                                                        ワイン                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="フレッシュグリーン"
+                                data-img="uploads/fabrics/para-08.jpg"
+                                data-color="#93c221">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-08_thumb.jpg" alt="" loading="lazy">
+                                                        フレッシュグリーン                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="マリンブルー"
+                                data-img="uploads/fabrics/para-09.jpg"
+                                data-color="#1a4fa0">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-09_thumb.jpg" alt="" loading="lazy">
+                                                        マリンブルー                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ダークブルー"
+                                data-img="uploads/fabrics/para-10.jpg"
+                                data-color="#22305c">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-10_thumb.jpg" alt="" loading="lazy">
+                                                        ダークブルー                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="グリーン"
+                                data-img="uploads/fabrics/para-11.jpg"
+                                data-color="#12796a">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-11_thumb.jpg" alt="" loading="lazy">
+                                                        グリーン                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ハンターグリーン"
+                                data-img="uploads/fabrics/para-12.jpg"
+                                data-color="#1e4535">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-12_thumb.jpg" alt="" loading="lazy">
+                                                        ハンターグリーン                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ブラウン"
+                                data-img="uploads/fabrics/para-13.jpg"
+                                data-color="#5a3f2c">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-13_thumb.jpg" alt="" loading="lazy">
+                                                        ブラウン                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ブラック"
+                                data-img="uploads/fabrics/para-14.jpg"
+                                data-color="#1c1c1c">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-14_thumb.jpg" alt="" loading="lazy">
+                                                        ブラック                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="スタッコ"
+                                data-img="uploads/fabrics/para-19.jpg"
+                                data-color="#e3ded2">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-19_thumb.jpg" alt="" loading="lazy">
+                                                        スタッコ                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="シルバーグレー"
+                                data-img="uploads/fabrics/para-20.jpg"
+                                data-color="#b7b4ae">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-20_thumb.jpg" alt="" loading="lazy">
+                                                        シルバーグレー                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="サンドベージュ"
+                                data-img="uploads/fabrics/para-21.jpg"
+                                data-color="#ddcfb4">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-21_thumb.jpg" alt="" loading="lazy">
+                                                        サンドベージュ                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ブリッツブルー"
+                                data-img="uploads/fabrics/para-22.jpg"
+                                data-color="#6d84a6">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-22_thumb.jpg" alt="" loading="lazy">
+                                                        ブリッツブルー                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ヘザーグレー"
+                                data-img="uploads/fabrics/para-23.jpg"
+                                data-color="#4b4b4b">
+                                                            <img class="pva-swatch" src="uploads/fabrics/para-23_thumb.jpg" alt="" loading="lazy">
+                                                        ヘザーグレー                        </button>
+                                    </div>
+            </div>
+                    <div class="pva-step pva-step--colors" data-for-fabric="3" hidden>
+                <p class="pva-label">
+                    ⑥天幕カラー
+                    <span class="pva-note">（サマーシールド・9色）</span>
+                </p>
+                <div class="pva-opts pva-opts--colors">
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ホワイト"
+                                data-img=""
+                                data-color="#f2f0eb">
+                                                            <span class="pva-swatch" style="background:#f2f0eb"></span>
+                                                        ホワイト                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ベージュ"
+                                data-img=""
+                                data-color="#ddcfb4">
+                                                            <span class="pva-swatch" style="background:#ddcfb4"></span>
+                                                        ベージュ                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="グリーン"
+                                data-img=""
+                                data-color="#12796a">
+                                                            <span class="pva-swatch" style="background:#12796a"></span>
+                                                        グリーン                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ブラウン"
+                                data-img=""
+                                data-color="#5a3f2c">
+                                                            <span class="pva-swatch" style="background:#5a3f2c"></span>
+                                                        ブラウン                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ブラック"
+                                data-img=""
+                                data-color="#1c1c1c">
+                                                            <span class="pva-swatch" style="background:#1c1c1c"></span>
+                                                        ブラック                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ホワイト"
+                                data-img=""
+                                data-color="#f2f0eb">
+                                                            <span class="pva-swatch" style="background:#f2f0eb"></span>
+                                                        ホワイト                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ベージュ"
+                                data-img=""
+                                data-color="#ddcfb4">
+                                                            <span class="pva-swatch" style="background:#ddcfb4"></span>
+                                                        ベージュ                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="グリーン"
+                                data-img=""
+                                data-color="#12796a">
+                                                            <span class="pva-swatch" style="background:#12796a"></span>
+                                                        グリーン                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ブラウン"
+                                data-img=""
+                                data-color="#5a3f2c">
+                                                            <span class="pva-swatch" style="background:#5a3f2c"></span>
+                                                        ブラウン                        </button>
+                                    </div>
+            </div>
+                    <div class="pva-step pva-step--colors" data-for-fabric="4" hidden>
+                <p class="pva-label">
+                    ⑥天幕カラー
+                    <span class="pva-note">（防炎生地ソルテリア・6色）</span>
+                </p>
+                <div class="pva-opts pva-opts--colors">
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ホワイト"
+                                data-img=""
+                                data-color="#f2f0eb">
+                                                            <span class="pva-swatch" style="background:#f2f0eb"></span>
+                                                        ホワイト                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ベージュ"
+                                data-img=""
+                                data-color="#ddcfb4">
+                                                            <span class="pva-swatch" style="background:#ddcfb4"></span>
+                                                        ベージュ                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="サンドベージュ"
+                                data-img=""
+                                data-color="#ddcfb4">
+                                                            <span class="pva-swatch" style="background:#ddcfb4"></span>
+                                                        サンドベージュ                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="グリーン"
+                                data-img=""
+                                data-color="#12796a">
+                                                            <span class="pva-swatch" style="background:#12796a"></span>
+                                                        グリーン                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ブラウン"
+                                data-img=""
+                                data-color="#5a3f2c">
+                                                            <span class="pva-swatch" style="background:#5a3f2c"></span>
+                                                        ブラウン                        </button>
+                                            <button type="button" class="pva-opt" data-kind="value"
+                                data-label="ブラック"
+                                data-img=""
+                                data-color="#1c1c1c">
+                                                            <span class="pva-swatch" style="background:#1c1c1c"></span>
+                                                        ブラック                        </button>
+                                    </div>
+            </div>
+            </div>
                 </div>
                                                 <div class="pd-spec-section">
                     <p class="pd-spec-heading">仕様</p>
