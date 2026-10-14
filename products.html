@@ -68,13 +68,91 @@
         <p class="products-lead">
             カテゴリ名をタップすると、素材・産地などの小分類に分かれた一覧が開きます。
         </p>
-        <div class="search-wrap">
-            <form action="products.html" method="get" role="search">
+        <form action="products.html" method="get" role="search" id="productSearch"
+              data-fields="{&quot;&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;phi&quot;:&quot;Φ(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;parasol-and-market-umbrella&quot;:{&quot;phi&quot;:&quot;サイズ Φ(mm)&quot;,&quot;h&quot;:&quot;総高 H(mm)&quot;},&quot;base&quot;:{&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;eye-catch-item&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;phi&quot;:&quot;Φ(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;day-bed&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;chaise&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;dining-chair&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;lounge-chair-and-sofa&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;high-chair&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;bench&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;stool&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;ottoman&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;dining-table&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;lounge-table&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;side-table&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;high-table&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;table-top&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;table-leg&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;other&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;phi&quot;:&quot;Φ(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;}}">
+            <div class="search-wrap">
                 <span class="search-icon" aria-hidden="true">⌕</span>
                 <input type="search" name="q" value=""
                        placeholder="品番・商品名・ブランド名で検索" aria-label="製品を検索">
-            </form>
-        </div>
+            </div>
+                        <div class="search-filters">
+                <label class="search-filter">
+                    <span>カテゴリ</span>
+                    <select name="cat" id="searchCat">
+                        <option value="">すべて</option>
+                                                    <option value="parasol-and-market-umbrella">Parasol ＆ Market Umbrella</option>
+                                                    <option value="base">Base</option>
+                                                    <option value="eye-catch-item">Eye-catch Item</option>
+                                                    <option value="day-bed">Day Bed</option>
+                                                    <option value="chaise">Chaise</option>
+                                                    <option value="dining-chair">Dining Chair</option>
+                                                    <option value="lounge-chair-and-sofa">Lounge Chair＆Sofa</option>
+                                                    <option value="high-chair">High Chair</option>
+                                                    <option value="bench">Bench</option>
+                                                    <option value="stool">Stool</option>
+                                                    <option value="ottoman">Ottoman</option>
+                                                    <option value="dining-table">Dining Table</option>
+                                                    <option value="lounge-table">Lounge Table</option>
+                                                    <option value="side-table">Side Table</option>
+                                                    <option value="high-table">High Table</option>
+                                                    <option value="table-top">Table Top</option>
+                                                    <option value="table-leg">Table Leg</option>
+                                                    <option value="other">Other</option>
+                                            </select>
+                </label>
+                <div class="search-ranges" id="searchRanges">
+                                            <div class="search-filter">
+                            <span>W(mm)</span>
+                            <div class="search-range">
+                                <input type="number" name="min_w" value="" placeholder="下限" min="0" step="any">
+                                <span>〜</span>
+                                <input type="number" name="max_w" value="" placeholder="上限" min="0" step="any">
+                            </div>
+                        </div>
+                                            <div class="search-filter">
+                            <span>D(mm)</span>
+                            <div class="search-range">
+                                <input type="number" name="min_d" value="" placeholder="下限" min="0" step="any">
+                                <span>〜</span>
+                                <input type="number" name="max_d" value="" placeholder="上限" min="0" step="any">
+                            </div>
+                        </div>
+                                            <div class="search-filter">
+                            <span>H(mm)</span>
+                            <div class="search-range">
+                                <input type="number" name="min_h" value="" placeholder="下限" min="0" step="any">
+                                <span>〜</span>
+                                <input type="number" name="max_h" value="" placeholder="上限" min="0" step="any">
+                            </div>
+                        </div>
+                                            <div class="search-filter">
+                            <span>SH(mm)</span>
+                            <div class="search-range">
+                                <input type="number" name="min_sh" value="" placeholder="下限" min="0" step="any">
+                                <span>〜</span>
+                                <input type="number" name="max_sh" value="" placeholder="上限" min="0" step="any">
+                            </div>
+                        </div>
+                                            <div class="search-filter">
+                            <span>Φ(mm)</span>
+                            <div class="search-range">
+                                <input type="number" name="min_phi" value="" placeholder="下限" min="0" step="any">
+                                <span>〜</span>
+                                <input type="number" name="max_phi" value="" placeholder="上限" min="0" step="any">
+                            </div>
+                        </div>
+                                            <div class="search-filter">
+                            <span>重量(kg)</span>
+                            <div class="search-range">
+                                <input type="number" name="min_kg" value="" placeholder="下限" min="0" step="any">
+                                <span>〜</span>
+                                <input type="number" name="max_kg" value="" placeholder="上限" min="0" step="any">
+                            </div>
+                        </div>
+                                    </div>
+                <button type="submit" class="search-submit">検索</button>
+            </div>
+        </form>
     </div>
 
     

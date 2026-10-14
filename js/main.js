@@ -612,6 +612,53 @@
     }
 
     /* --------------------------------------------------------
+       製品一覧：カテゴリを選び直したら、寸法の項目をそのカテゴリのものに入れ替える
+       （項目の定義は config/queries.php の sizeSearchFields()。form の data-fields に入っている）
+    -------------------------------------------------------- */
+    function initProductSearch() {
+        var form = document.getElementById('productSearch');
+        var select = document.getElementById('searchCat');
+        var box = document.getElementById('searchRanges');
+        if (!form || !select || !box) return;
+        var map = {};
+        try { map = JSON.parse(form.dataset.fields || '{}'); } catch (e) { return; }
+
+        select.addEventListener('change', function () {
+            var fields = map[select.value] || map[''] || {};
+            // 入力済みの値は、同じ項目なら引き継ぐ
+            var kept = {};
+            box.querySelectorAll('input').forEach(function (i) { kept[i.name] = i.value; });
+            box.innerHTML = '';
+            Object.keys(fields).forEach(function (key) {
+                var wrap = document.createElement('div');
+                wrap.className = 'search-filter';
+                var label = document.createElement('span');
+                label.textContent = fields[key];
+                var range = document.createElement('div');
+                range.className = 'search-range';
+                ['min', 'max'].forEach(function (side, i) {
+                    var input = document.createElement('input');
+                    input.type = 'number';
+                    input.name = side + '_' + key;
+                    input.placeholder = side === 'min' ? '下限' : '上限';
+                    input.min = '0';
+                    input.step = 'any';
+                    input.value = kept[input.name] || '';
+                    range.appendChild(input);
+                    if (i === 0) {
+                        var sep = document.createElement('span');
+                        sep.textContent = '〜';
+                        range.appendChild(sep);
+                    }
+                });
+                wrap.appendChild(label);
+                wrap.appendChild(range);
+                box.appendChild(wrap);
+            });
+        });
+    }
+
+    /* --------------------------------------------------------
        関連商品の横送り（4件以上のとき）
     -------------------------------------------------------- */
     function initRelated() {
@@ -651,6 +698,7 @@
         initTabs();
         initLightbox();
         initPicker();
+        initProductSearch();
         initRelated();
         initAboutSubnav();
     });

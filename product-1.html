@@ -81,13 +81,17 @@
 
         <!-- ── 商品情報 ─────────────────────────── -->
         <div class="pd-info">
-                            <p class="pd-category">Made in Japan</p>
-            
-            <h1 class="pd-name">
-                                FPシリーズ            </h1>
+                                        <p class="pd-category">Parasol ＆ Market Umbrella／Made in Japan</p>
+                        
+            <h1 class="pd-name">FPシリーズ</h1>
 
-                            <p class="pd-sku">Parasol</p>
-            
+                        <div class="pd-badges">
+                                    <span class="pd-badge pd-badge--kind">Parasol</span>
+                                <span class="pd-badge pd-badge--format">シリーズ</span>
+                                    <span class="pd-badge pd-badge--stock" style="--badge:#F97316">受注生産品</span>
+                                                    <span class="pd-badge pd-badge--colors">custom colors</span>
+                            </div>
+
                             <p class="pd-desc">国内で唯一SGマークを取得し、半世紀以上も販売しているロングセラー商品。<br />
 日本風土の厳しい環境の中でも耐えうる強度・耐候性です。職人が一本一本手作りしておりますので、<br />
 生地の種類 / 天幕の仕様 / フレーム色などのフルカスタムや、破損時に部材単位での修理対応が可能です。</p>
@@ -96,7 +100,7 @@
                             <!-- ── ラインナップ（シリーズもの）───────── -->
                 <div class="pd-spec-section">
                     <div class="pd-spec-heading-row">
-                        <p class="pd-spec-heading">ラインナップ</p>
+                        <p class="pd-spec-heading">ラインナップ<span class="pd-lineup-count">全5種類</span></p>
                                                     <button type="button" class="pd-size-toggle" id="pdSizeToggle" aria-expanded="false">詳しく見る</button>
                                             </div>
 
@@ -105,17 +109,39 @@
                              style="grid-template-columns:76px repeat(5, minmax(74px, 1fr));">
 
                             <div class="pd-size-cell pd-size-rowlabel">品番</div>
-                                                            <div class="pd-size-cell pd-size-val is-partno">FP40
+                                                            <div class="pd-size-cell pd-size-val is-partno">FP40<br />
 （8本骨）</div>
-                                                            <div class="pd-size-cell pd-size-val is-partno">FP40
+                                                            <div class="pd-size-cell pd-size-val is-partno">FP40<br />
 （10本骨）</div>
-                                                            <div class="pd-size-cell pd-size-val is-partno">FP40
+                                                            <div class="pd-size-cell pd-size-val is-partno">FP40<br />
 （12本骨）</div>
-                                                            <div class="pd-size-cell pd-size-val is-partno">FP45
+                                                            <div class="pd-size-cell pd-size-val is-partno">FP45<br />
 （12本骨）</div>
-                                                            <div class="pd-size-cell pd-size-val is-partno">FP50
+                                                            <div class="pd-size-cell pd-size-val is-partno">FP50<br />
 （12本骨）</div>
                             
+                                                                                        <div class="pd-size-cell pd-size-rowlabel">写真</div>
+                                                                    <div class="pd-size-cell pd-size-val pd-size-photo">
+                                                                                    <img src="uploads/app/13a69d6bf201520c_thumb.jpg" alt="FP40
+（8本骨）" loading="lazy" decoding="async">
+                                                                            </div>
+                                                                    <div class="pd-size-cell pd-size-val pd-size-photo">
+                                                                                    <img src="uploads/app/2312483f114076ff_thumb.jpg" alt="FP40
+（10本骨）" loading="lazy" decoding="async">
+                                                                            </div>
+                                                                    <div class="pd-size-cell pd-size-val pd-size-photo">
+                                                                                    <img src="uploads/app/b9a8b5c8e10ab289_thumb.jpg" alt="FP40
+（12本骨）" loading="lazy" decoding="async">
+                                                                            </div>
+                                                                    <div class="pd-size-cell pd-size-val pd-size-photo">
+                                                                                    <img src="uploads/app/457aa0dfd63ee626_thumb.jpg" alt="FP45
+（12本骨）" loading="lazy" decoding="async">
+                                                                            </div>
+                                                                    <div class="pd-size-cell pd-size-val pd-size-photo">
+                                                                                    <img src="uploads/app/41835aaec316b875_thumb.jpg" alt="FP50
+（12本骨）" loading="lazy" decoding="async">
+                                                                            </div>
+                                                            
                                                             <div class="pd-size-cell pd-size-rowlabel">サイズ</div>
                                                                     <div class="pd-size-cell pd-size-val">1,860φ</div>
                                                                     <div class="pd-size-cell pd-size-val">1,860φ</div>
@@ -123,7 +149,7 @@
                                                                     <div class="pd-size-cell pd-size-val">2,100φ</div>
                                                                     <div class="pd-size-cell pd-size-val">2,400φ</div>
                                                             
-                                                            <div class="pd-size-cell pd-size-rowlabel">上代</div>
+                                                            <div class="pd-size-cell pd-size-rowlabel">上代（●）</div>
                                                                     <div class="pd-size-cell pd-size-val is-price">37000</div>
                                                                     <div class="pd-size-cell pd-size-val is-price">¥41,000～</div>
                                                                     <div class="pd-size-cell pd-size-val is-price">¥50,000～</div>
@@ -1133,9 +1159,12 @@
                             </div>
                                                     <div class="pd-spec-row">
                                 <span class="pd-spec-key">素材</span>
-                                <span class="pd-spec-val">ギボシ：樹脂<br />
-心棒：アルミ（ジョイント式）<br />
-天幕：アクリル or ポリエステル</span>
+                                <span class="pd-spec-val"><span class="pd-kv"><span class="pd-kv-k">ギボシ</span><span class="pd-kv-s">：</span><span class="pd-kv-v">樹脂</span><span class="pd-kv-k">心棒</span><span class="pd-kv-s">：</span><span class="pd-kv-v">アルミ（ジョイント式）</span><span class="pd-kv-k">天幕</span><span class="pd-kv-s">：</span><span class="pd-kv-v">アクリル or ポリエステル</span></span></span>
+                            </div>
+                                                    <div class="pd-spec-row">
+                                <span class="pd-spec-key">オプション</span>
+                                <span class="pd-spec-val">インクジェット印刷（富士ポリエステルのみ）<br />
+シルクスクリーン印刷</span>
                             </div>
                                                     <div class="pd-spec-row">
                                 <span class="pd-spec-key">カタログページ</span>
