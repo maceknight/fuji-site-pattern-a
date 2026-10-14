@@ -669,3 +669,14 @@ button.pd-variation-icon-item {
     .catalog-banner-action { font-size: 10.5px; letter-spacing: 0; }
     .catalog-banner-cover { width: 54px; }
 }
+/* 表紙をリボンの上にもう少し深く重ねる（先方の指定）。そのぶんリボンの右の余白を広げ、文字が隠れないようにする */
+.catalog-banner-cover { margin-left: -44px; }
+.catalog-banner-ribbon { padding-right: 58px; }
+@media (max-width: 420px) {
+    .catalog-banner-cover { margin-left: -38px; }
+    .catalog-banner-ribbon { padding-right: 48px; }
+}
+@media (max-width: 330px) {
+    .catalog-banner-cover { margin-left: -32px; }
+    .catalog-banner-ribbon { padding-right: 40px; }
+}
