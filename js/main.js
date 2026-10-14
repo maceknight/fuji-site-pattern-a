@@ -450,14 +450,17 @@
 
     /* --------------------------------------------------------
        商品詳細：バリエーションのアプリ版（A案(2)）
-       components/variation-picker.php の動き。
+       components/variation-picker.php の動き。先方の商品データ入力アプリのプレビューと同じ規則にしている。
          ・見出しの切り替えで A案(1)（一覧）と行き来する。選んだ方は覚えておく
-         ・タップで選ぶ。写真があれば左のメイン画像を差し替える
-         ・生地を選ぶと、その生地の色の段を出す
-         ・丸型の型番でしか選べない項目は、角型の型番を選ぶと灰色にする
-         ・ダブルクリックで拡大。生地は生地ページへ
+         ・タップで選ぶ（もう一度タップで外す）。写真があれば左のメイン画像を差し替える
+         ・連動：段の data-react が grey なら合わない値を灰色に、filter なら隠す（合う値が無ければ段ごと隠す）。
+           合うかどうかは、data-watch の段で選んだ値の data-tags と、自分の値の data-tags が1つでも一致するか
+         ・ある段の選択を変えたら、その段を見張っている段の選択を外す（さらにその先も）
+         ・段の番号（①②…）は見えている段だけで振り直す
+         ・ダブルクリックで拡大。生地ページに当たる項目は生地ページへ
     -------------------------------------------------------- */
     var PICKER_KEY = 'fuji.variationMode';
+    var CIRCLED = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩', '⑪', '⑫'];
 
     function initPicker() {
         var picker = document.getElementById('pdPicker');
@@ -471,6 +474,15 @@
         var summary = document.getElementById('pdPickerSummary');
         var summaryDefault = summary ? summary.textContent : '';
         var steps = Array.prototype.slice.call(picker.querySelectorAll('.pva-step'));
+        var byId = {};
+        steps.forEach(function (s) { byId[s.dataset.group] = s; });
+        var shownBy = null; // いま左に出している写真の持ち主（.pva-opt）
+
+        function tagsOf(opt) {
+            try { return JSON.parse(opt.dataset.tags || '[]'); } catch (e) { return []; }
+        }
+        function selected(step) { return step ? step.querySelector('.pva-opt[aria-pressed="true"]') : null; }
+        function opts(step) { return Array.prototype.slice.call(step.querySelectorAll('.pva-opt')); }
 
         function setMode(mode) {
             var app = mode === '2';
@@ -487,16 +499,18 @@
         });
         try { if (localStorage.getItem(PICKER_KEY) === '2') setMode('2'); } catch (e) {}
 
-        function showOnMain(src, alt) {
-            if (!mainImg || !src) return;
-            mainImg.src = src;
-            mainImg.alt = alt || '';
+        function showOnMain(opt) {
+            if (!mainImg || !opt.dataset.img) return;
+            mainImg.src = opt.dataset.img;
+            mainImg.alt = opt.dataset.label || '';
             main.classList.add('pva-variant');
+            shownBy = opt;
             // 寸法線は1枚目の写真に合わせた座標なので、差し替え中は隠す
             window.pdMainImgIsTop = false;
             updateSizeMarkers();
         }
         function restoreMain() {
+            shownBy = null;
             if (!mainImg || !original || !main.classList.contains('pva-variant')) return;
             mainImg.src = original.src;
             mainImg.alt = original.alt;
@@ -504,40 +518,67 @@
             window.pdMainImgIsTop = true;
             updateSizeMarkers();
         }
-
-        function selected(step) { return step.querySelector('.pva-opt[aria-pressed="true"]'); }
-
-        function updateSummary() {
-            if (!summary) return;
-            var picks = [];
-            steps.forEach(function (step) {
-                if (step.hidden) return;
-                var opt = selected(step);
-                if (opt) picks.push(opt.dataset.label);
-            });
-            summary.textContent = picks.length ? '選択中：' + picks.join(' ／ ') : summaryDefault;
+        // 出していた写真の項目が外れたら、ほかに選ばれている写真つきの項目（下の段から）に戻す。無ければ元の写真
+        function refreshMain() {
+            if (shownBy && shownBy.getAttribute('aria-pressed') === 'true' && !shownBy.closest('.pva-step').hidden) return;
+            var picks = steps.filter(function (s) { return !s.hidden; }).map(selected)
+                .filter(function (o) { return o && o.dataset.img; });
+            if (picks.length) showOnMain(picks[picks.length - 1]); else restoreMain();
         }
 
-        // 型番の形に合わない項目を灰色にする（選んでいたら外す）
-        function applyShape() {
-            var lineup = picker.querySelector('.pva-opt[data-kind="lineup"][aria-pressed="true"]');
-            var shape = lineup ? lineup.dataset.shape : '';
-            picker.querySelectorAll('.pva-opt[data-requires]').forEach(function (opt) {
-                var ok = !shape || opt.dataset.requires === shape;
-                opt.disabled = !ok;
-                opt.title = ok ? '' : 'この型番では選べません';
-                if (!ok) opt.setAttribute('aria-pressed', 'false');
-            });
+        // gid の選択が変わったとき、gid を見張っている段の選択を外す（さらにその先も）
+        function clearDependents(gid) {
+            var frontier = [gid];
+            var guard = 0;
+            while (frontier.length && guard++ < 20) {
+                var next = [];
+                steps.forEach(function (s) {
+                    if (s.dataset.react !== 'none' && frontier.indexOf(s.dataset.watch) !== -1) {
+                        var o = selected(s);
+                        if (o) o.setAttribute('aria-pressed', 'false');
+                        next.push(s.dataset.group);
+                    }
+                });
+                frontier = next;
+            }
         }
 
-        function showFabric(fabricId) {
-            picker.querySelectorAll('.pva-step--colors').forEach(function (step) {
-                var show = step.dataset.forFabric === fabricId;
-                if (!show) {
-                    step.querySelectorAll('.pva-opt').forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
+        // 連動の反映（アプリの variationsPreview と同じ判定）と、段番号の振り直し
+        function apply() {
+            var n = 0;
+            steps.forEach(function (s) {
+                var react = s.dataset.react;
+                var own = {};
+                opts(s).forEach(function (o) { tagsOf(o).forEach(function (t) { own[t] = true; }); });
+                var matching = [];
+                var watched = byId[s.dataset.watch];
+                if (react !== 'none' && watched && !watched.hidden) {
+                    var w = selected(watched);
+                    if (w) matching = tagsOf(w).filter(function (t) { return own[t]; });
                 }
-                step.hidden = !show;
+                var hasVocab = Object.keys(own).length > 0;
+                var hideStep = react === 'filter' && hasVocab && matching.length === 0;
+                opts(s).forEach(function (o) {
+                    var fits = tagsOf(o).some(function (t) { return matching.indexOf(t) !== -1; });
+                    var hide = react === 'filter' && matching.length > 0 && !fits;
+                    var grey = react === 'grey' && matching.length > 0 && !fits;
+                    o.hidden = hide;
+                    o.disabled = grey;
+                    o.title = grey ? 'この組み合わせでは選べません' : '';
+                    if ((hide || grey) && o.getAttribute('aria-pressed') === 'true') o.setAttribute('aria-pressed', 'false');
+                });
+                if (!hideStep && opts(s).every(function (o) { return o.hidden; })) hideStep = true;
+                s.hidden = hideStep;
+                var num = s.querySelector('.pva-num');
+                if (!hideStep && num) num.textContent = CIRCLED[n] || (n + 1) + '.';
+                if (!hideStep) n++;
             });
+            refreshMain();
+            if (summary) {
+                var picks = steps.filter(function (s) { return !s.hidden; }).map(selected)
+                    .filter(Boolean).map(function (o) { return o.dataset.label; });
+                summary.textContent = picks.length ? '選択中：' + picks.join(' ／ ') : summaryDefault;
+            }
         }
 
         picker.querySelectorAll('.pva-opt').forEach(function (opt) {
@@ -545,20 +586,16 @@
             opt.addEventListener('click', function () {
                 if (opt.disabled) return;
                 var step = opt.closest('.pva-step');
-                step.querySelectorAll('.pva-opt').forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
-                opt.setAttribute('aria-pressed', 'true');
-
-                if (opt.dataset.kind === 'lineup') applyShape();
-                if (opt.dataset.kind === 'fabric') showFabric(opt.dataset.fabric || '');
-                if (opt.dataset.img) showOnMain(opt.dataset.img, opt.dataset.label);
-                updateSummary();
+                var was = opt.getAttribute('aria-pressed') === 'true';
+                opts(step).forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
+                if (!was) opt.setAttribute('aria-pressed', 'true');
+                clearDependents(step.dataset.group);
+                if (!was && opt.dataset.img) showOnMain(opt);
+                apply();
             });
             opt.addEventListener('dblclick', function () {
                 if (opt.disabled) return;
-                if (opt.dataset.kind === 'fabric') {
-                    if (opt.dataset.href) window.location.href = opt.dataset.href;
-                    return;
-                }
+                if (opt.dataset.href) { window.location.href = opt.dataset.href; return; }
                 if (opt.dataset.img || opt.dataset.color) {
                     openLightbox(opt.dataset.img, opt.dataset.color, opt.dataset.label);
                 }
@@ -568,11 +605,10 @@
         var reset = document.getElementById('pdPickerReset');
         if (reset) reset.addEventListener('click', function () {
             picker.querySelectorAll('.pva-opt').forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
-            showFabric(null);
-            applyShape();
             restoreMain();
-            updateSummary();
+            apply();
         });
+        apply();
     }
 
     /* --------------------------------------------------------

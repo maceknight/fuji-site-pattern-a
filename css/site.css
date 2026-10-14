@@ -504,7 +504,7 @@ button.pd-variation-icon-item {
 /* ── バリエーションのアプリ版（A案(2)）──────────────
    components/variation-picker.php ／ js/main.js の initPicker()。
    先方のアプリの画面（修正希望 PDF 3ページ目）の並びに合わせ、色と書体はサイトのものを使う */
-.pd-variation-accordion[hidden], .pva[hidden], .pva-step[hidden] { display: none !important; }
+.pd-variation-accordion[hidden], .pva[hidden], .pva-step[hidden], .pva-opt[hidden] { display: none !important; }
 
 .pva-switch { display: inline-flex; border: 1px solid var(--fog); border-radius: 2px; overflow: hidden; }
 .pva-switch button {
@@ -588,3 +588,11 @@ button.pd-variation-icon-item {
 /* 縦長のロゴは、ブランドページの見出しでは高さを取り、製品一覧の Brand 行では横長のロゴと釣り合う大きさに */
 .brand-header-logo--tall { height: 120px; }
 .scroll-thumb--logo-tall img { max-height: 56%; }
+
+/* ── 商品詳細：メイン画像とサブ画像を切らずに全体を見せる ──
+   元テーマは object-fit: cover で正方形に切り抜いていたため、横長・縦長の写真の端が切れていた（先方の指摘）。
+   枠の中に収め、余った部分は白に */
+.pd-gallery-main { background: #fff; }
+.pd-gallery-main img { object-fit: contain; }
+.pd-gallery-thumb { background: #fff; }
+.pd-gallery-thumb img { object-fit: contain; }
