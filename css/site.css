@@ -650,3 +650,22 @@ button.pd-variation-icon-item {
 .catalog-banner { padding-left: 0; padding-right: 26px; }
 .catalog-banner-cover { margin-right: 0; margin-left: -20px; }
 .catalog-banner-ribbon { padding: 14px 34px 14px 26px; }
+/* どの幅でもボタンの形（横長のリボン＋表紙）が崩れないように：
+   文字は折り返さず、狭い画面では余白・文字・表紙を少しずつ小さくする */
+.catalog-banner { width: 100%; }
+.catalog-banner-ribbon { min-width: 0; }
+.catalog-banner-title, .catalog-banner-action { white-space: nowrap; }
+@media (max-width: 420px) {
+    .catalog-banner { padding-right: 20px; }
+    .catalog-banner-ribbon { padding: 12px 28px 12px 20px; gap: 4px; }
+    .catalog-banner-title { font-size: 15px; gap: 6px; }
+    .catalog-banner-title .yr { font-size: 10px; }
+    .catalog-banner-action { font-size: 11px; letter-spacing: .03em; gap: 6px; }
+    .catalog-banner-cover { width: 62px; margin-left: -18px; }
+}
+@media (max-width: 330px) {
+    .catalog-banner-ribbon { padding: 10px 24px 10px 16px; }
+    .catalog-banner-title { font-size: 14px; }
+    .catalog-banner-action { font-size: 10.5px; letter-spacing: 0; }
+    .catalog-banner-cover { width: 54px; }
+}
