@@ -545,3 +545,14 @@ button.pd-variation-icon-item {
 /* 差し替えた写真は色見本や生地の写真なので、切らずに白地に収める */
 .pd-gallery-main.pva-variant { background: #fff; }
 .pd-gallery-main.pva-variant img { object-fit: contain; }
+
+/* ── 一覧サムネイル：ブランドのロゴが写真に被らないように ──
+   ブランドのある商品は、上の帯をロゴ用に空けて、写真はその下に収める（先方のアプリと同じ並び）。
+   ロゴの枠は元テーマの 50%×33% だと帯が太くなりすぎるので、高さだけ詰める。 */
+.has-brand .product-brand-tag--logo { height: 17%; }
+.scroll-thumb--contain.has-brand img,
+.product-thumb--contain.has-brand img {
+    position: absolute; left: 5%; top: 30%; width: 90%; height: 66%;
+}
+/* ブランドページでは帯ごと要らない（ロゴを出していないので） */
+.brand-page-grid .product-thumb--contain.has-brand img { position: static; width: 100%; height: 100%; }
