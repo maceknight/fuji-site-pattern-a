@@ -680,3 +680,11 @@ button.pd-variation-icon-item {
     .catalog-banner-cover { margin-left: -32px; }
     .catalog-banner-ribbon { padding-right: 40px; }
 }
+
+/* ── 会社概要の表：細い画面では見出しの下に値を置く ──
+   現行サイトに合わせて経歴・歴代経営者など長い項目が増えたため、横並びのままだと値の列が細く折り返しだらけになる */
+@media (max-width: 600px) {
+    .about-table th, .about-table td { display: block; width: auto; }
+    .about-table th { padding: 14px 0 2px; }
+    .about-table td { padding: 0 0 14px; }
+}
