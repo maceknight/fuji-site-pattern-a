@@ -566,6 +566,8 @@
         var byId = {};
         steps.forEach(function (s) { byId[s.dataset.group] = s; });
         var shownBy = null; // いま左に出している写真の持ち主（.pva-opt）
+        // 選んだ値の写真で左のメイン画像を差し替えるか（#pdPicker の data-swap-image。いまは先方の要望で止めている）
+        var swapMain = picker.dataset.swapImage === '1';
 
         function tagsOf(opt) {
             try { return JSON.parse(opt.dataset.tags || '[]'); } catch (e) { return []; }
@@ -662,7 +664,7 @@
                 if (!hideStep && num) num.textContent = CIRCLED[n] || (n + 1) + '.';
                 if (!hideStep) n++;
             });
-            refreshMain();
+            if (swapMain) refreshMain();
             if (summary) {
                 var picks = steps.filter(function (s) { return !s.hidden; }).map(selected)
                     .filter(Boolean).map(function (o) { return o.dataset.label; });
@@ -679,7 +681,7 @@
                 opts(step).forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
                 if (!was) opt.setAttribute('aria-pressed', 'true');
                 clearDependents(step.dataset.group);
-                if (!was && opt.dataset.img) showOnMain(opt);
+                if (swapMain && !was && opt.dataset.img) showOnMain(opt);
                 apply();
             });
             opt.addEventListener('dblclick', function () {
