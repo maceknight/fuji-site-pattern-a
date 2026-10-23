@@ -485,6 +485,8 @@
                 var li = document.createElement('li');
                 var a = document.createElement('a');
                 a.href = link.href;
+                a.target = '_blank';
+                a.rel = 'noopener';
                 a.textContent = link.label + ' →';
                 li.appendChild(a);
                 list.appendChild(li);
@@ -521,9 +523,10 @@
         document.querySelectorAll('.pd-help-btn').forEach(function (btn) {
             btn.addEventListener('click', function (e) {
                 e.stopPropagation();
+                // 生地ページは別タブで開く（商品ページで選んだ内容を残すため。先方の要望）
                 var page = selectedFabricPage(btn);
                 if (page) {
-                    window.location.href = page;
+                    window.open(page, '_blank', 'noopener');
                     return;
                 }
                 open(btn);
@@ -555,7 +558,9 @@
         var picker = document.getElementById('pdPicker');
         var list = document.getElementById('pdVariationWrap');
         var switcher = document.querySelector('.pva-switch');
-        if (!picker || !list || !switcher) return;
+        if (!picker) return;
+        // A案(2) に統合したページ（切り替えも一覧も無い）では、アプリ型をそのまま出す
+        if (!list || !switcher) picker.hidden = false;
 
         var main = document.getElementById('pdMainImg');
         var mainImg = main ? main.querySelector('img') : null;
@@ -585,10 +590,12 @@
             if (!app) restoreMain();
             try { localStorage.setItem(PICKER_KEY, mode); } catch (e) {}
         }
-        switcher.querySelectorAll('button').forEach(function (b) {
-            b.addEventListener('click', function () { setMode(b.dataset.mode); });
-        });
-        try { if (localStorage.getItem(PICKER_KEY) === '2') setMode('2'); } catch (e) {}
+        if (list && switcher) {
+            switcher.querySelectorAll('button').forEach(function (b) {
+                b.addEventListener('click', function () { setMode(b.dataset.mode); });
+            });
+            try { if (localStorage.getItem(PICKER_KEY) === '2') setMode('2'); } catch (e) {}
+        }
 
         function showOnMain(opt) {
             if (!mainImg || !opt.dataset.img) return;
@@ -686,7 +693,7 @@
             });
             opt.addEventListener('dblclick', function () {
                 if (opt.disabled) return;
-                if (opt.dataset.href) { window.location.href = opt.dataset.href; return; }
+                if (opt.dataset.href) { window.open(opt.dataset.href, '_blank', 'noopener'); return; }
                 if (opt.dataset.img || opt.dataset.color) {
                     openLightbox(opt.dataset.img, opt.dataset.color, opt.dataset.label);
                 }

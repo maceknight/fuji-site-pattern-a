@@ -588,6 +588,16 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 .pd-help-images figcaption { font-size: 12px; color: var(--stone); margin-top: 6px; text-align: center; }
 
 .pva-step { margin-bottom: 16px; }
+/* 段（①②③…）の境目が分かりにくいので、見出しを色の帯にして、「？ 詳細」は帯の右端に置く（先方の要望） */
+.pva-step > .pd-group-head {
+    align-items: center; margin-bottom: 8px; padding: 6px 8px 6px 10px;
+    background: var(--paper-dark); border-left: 3px solid var(--warm);
+}
+.pva-step > .pd-group-head .pva-label { margin-bottom: 0; }
+.pva-step > .pd-group-head .pd-help-btn { margin: 0; }
+.pva-num { color: var(--warm); margin-right: 2px; }
+/* 「バリエーション」の見出しの横の「選択をリセット」 */
+.pd-spec-heading-row .pva-reset { margin-left: auto; }
 .pva-label { font-size: 12px; color: var(--ink); margin-bottom: 8px; letter-spacing: .04em; }
 .pva-note, .pva-mark { font-size: 10px; color: var(--stone); }
 .pva-opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px; }
