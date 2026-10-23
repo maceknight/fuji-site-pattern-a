@@ -574,6 +574,14 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 }
 .pd-help-title { font-size: 14px; color: var(--ink); margin: 0 36px 12px 0; letter-spacing: .04em; }
 .pd-help-text { font-size: 13px; color: var(--ink); line-height: 1.9; margin: 0 0 14px; white-space: pre-line; }
+.pd-help-links { margin: 0 0 14px; }
+.pd-help-links-label { font-size: 12px; color: var(--stone); margin: 0 0 8px; }
+.pd-help-links ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.pd-help-links a {
+    display: inline-block; padding: 5px 12px; border: 1px solid var(--fog); border-radius: 999px;
+    font-size: 12px; color: var(--ink); text-decoration: none; background: #fff;
+}
+.pd-help-links a:hover { border-color: var(--stone); }
 .pd-help-images { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 .pd-help-images figure { margin: 0; }
 .pd-help-images img { display: block; width: 100%; height: auto; max-height: 60vh; object-fit: contain; background: #fff; }

@@ -450,7 +450,9 @@
 
     /* --------------------------------------------------------
        商品詳細：バリエーションの項目の「？ 詳細」
-       components/variation-help.php のボタンの data-help-* を、小窓（#pdHelp）に流し込んで開く
+       components/variation-help.php のボタンの data-help-* を、小窓（#pdHelp）に流し込んで開く。
+       天幕カラーなど生地ページのある項目に連動している項目（data-help-links）は、
+       アプリ型で連動元（天幕種類）を選んでいれば、その生地ページへそのまま飛ぶ
     -------------------------------------------------------- */
     function initVariationHelp() {
         var box = document.getElementById('pdHelp');
@@ -458,17 +460,41 @@
         var title  = document.getElementById('pdHelpTitle');
         var text   = document.getElementById('pdHelpText');
         var images = document.getElementById('pdHelpImages');
+        var linkBox = document.getElementById('pdHelpLinks');
         var opener = null;
+
+        function parse(json) {
+            try { return JSON.parse(json || '[]') || []; } catch (e) { return []; }
+        }
+
+        // アプリ型で、連動元の段で選んでいる値の生地ページ
+        function selectedFabricPage(btn) {
+            var picker = btn.closest('#pdPicker');
+            if (!picker || !btn.dataset.helpWatch) return '';
+            var step = picker.querySelector('.pva-step[data-group="' + btn.dataset.helpWatch + '"]');
+            var sel = step ? step.querySelector('.pva-opt[aria-pressed="true"]') : null;
+            return sel && sel.dataset.href ? sel.dataset.href : '';
+        }
 
         function open(btn) {
             opener = btn;
+            var links = parse(btn.dataset.helpLinks);
+            var list = linkBox.querySelector('ul');
+            list.innerHTML = '';
+            links.forEach(function (link) {
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                a.href = link.href;
+                a.textContent = link.label + ' →';
+                li.appendChild(a);
+                list.appendChild(li);
+            });
+            linkBox.hidden = !links.length;
             title.textContent = btn.dataset.helpTitle || '';
             text.textContent = btn.dataset.helpText || '';
             text.hidden = !btn.dataset.helpText;
             images.innerHTML = '';
-            var list = [];
-            try { list = JSON.parse(btn.dataset.helpImages || '[]'); } catch (e) { list = []; }
-            list.forEach(function (item) {
+            parse(btn.dataset.helpImages).forEach(function (item) {
                 var fig = document.createElement('figure');
                 var img = document.createElement('img');
                 img.src = item.src;
@@ -495,6 +521,11 @@
         document.querySelectorAll('.pd-help-btn').forEach(function (btn) {
             btn.addEventListener('click', function (e) {
                 e.stopPropagation();
+                var page = selectedFabricPage(btn);
+                if (page) {
+                    window.location.href = page;
+                    return;
+                }
                 open(btn);
             });
         });
