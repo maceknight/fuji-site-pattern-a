@@ -423,6 +423,15 @@ button.pd-variation-icon-item {
     .fabric-color-grid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 16px; }
 }
 
+/* ── ページ上部の見出し（製品・カタログ・会社情報・お問い合わせ・お知らせで共通）──── */
+h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-height: inherit; }
+.contact-lead {
+    padding: 28px 48px 0; font-size: 13px; line-height: 2; color: var(--stone);
+}
+@media (max-width: 700px) {
+    .contact-lead { padding: 20px 24px 0; font-size: 12px; }
+}
+
 /* ── 会社情報 ───────────────────────────────── */
 .about-map-embed {
     width: 100%; aspect-ratio: 16/9; border: 0; display: block; background: var(--fog);
@@ -432,7 +441,19 @@ button.pd-variation-icon-item {
 .about-leaders-list { display: flex; flex-wrap: wrap; gap: 8px 28px; list-style: none; }
 .about-leaders-list li { font-size: 13px; color: var(--ink); }
 .about-leaders-list span { color: var(--stone); font-size: 11px; margin-right: 8px; }
-.history-year-sub { display: block; font-size: 10px; color: var(--stone); letter-spacing: 0.08em; }
+/* 沿革の年号：Cormorant の数字は小さく沈む形（オールドスタイル）なので、高さのそろった数字にする。
+   「明治の初期」が折り返さないよう幅も少し広げる */
+.history-list::before { left: 92px; }
+.history-year {
+    width: 92px; padding-right: 8px;
+    font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1;
+}
+.history-year-sub {
+    display: block; font-size: 13px; color: var(--stone); letter-spacing: 0.06em; margin-top: 2px;
+    font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1;
+}
+/* 節目の年（key）は、元テーマだと小さい灰色で逆に目立たなかったので、本文と同じ大きさで少し強める */
+.history-desc span { font-size: 13px; color: var(--ink); letter-spacing: 0; font-weight: 500; }
 
 /* ── お問い合わせ ─────────────────────────────── */
 .cf-error {
