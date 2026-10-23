@@ -449,6 +449,64 @@
     }
 
     /* --------------------------------------------------------
+       商品詳細：バリエーションの項目の「？ 詳細」
+       components/variation-help.php のボタンの data-help-* を、小窓（#pdHelp）に流し込んで開く
+    -------------------------------------------------------- */
+    function initVariationHelp() {
+        var box = document.getElementById('pdHelp');
+        if (!box) return;
+        var title  = document.getElementById('pdHelpTitle');
+        var text   = document.getElementById('pdHelpText');
+        var images = document.getElementById('pdHelpImages');
+        var opener = null;
+
+        function open(btn) {
+            opener = btn;
+            title.textContent = btn.dataset.helpTitle || '';
+            text.textContent = btn.dataset.helpText || '';
+            text.hidden = !btn.dataset.helpText;
+            images.innerHTML = '';
+            var list = [];
+            try { list = JSON.parse(btn.dataset.helpImages || '[]'); } catch (e) { list = []; }
+            list.forEach(function (item) {
+                var fig = document.createElement('figure');
+                var img = document.createElement('img');
+                img.src = item.src;
+                img.alt = item.caption || '';
+                fig.appendChild(img);
+                if (item.caption) {
+                    var cap = document.createElement('figcaption');
+                    cap.textContent = item.caption;
+                    fig.appendChild(cap);
+                }
+                images.appendChild(fig);
+            });
+            box.classList.add('is-open');
+            box.setAttribute('aria-hidden', 'false');
+            box.querySelector('.pd-lightbox-close').focus();
+        }
+        function close() {
+            if (!box.classList.contains('is-open')) return;
+            box.classList.remove('is-open');
+            box.setAttribute('aria-hidden', 'true');
+            if (opener) opener.focus();
+        }
+
+        document.querySelectorAll('.pd-help-btn').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                open(btn);
+            });
+        });
+        box.querySelectorAll('[data-close]').forEach(function (el) {
+            el.addEventListener('click', close);
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') close();
+        });
+    }
+
+    /* --------------------------------------------------------
        商品詳細：バリエーションのアプリ版（A案(2)）
        components/variation-picker.php の動き。先方の商品データ入力アプリのプレビューと同じ規則にしている。
          ・見出しの切り替えで A案(1)（一覧）と行き来する。選んだ方は覚えておく
@@ -697,6 +755,7 @@
         initLineupToggle();
         initTabs();
         initLightbox();
+        initVariationHelp();
         initPicker();
         initProductSearch();
         initRelated();

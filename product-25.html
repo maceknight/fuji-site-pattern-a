@@ -186,8 +186,15 @@ UE：¥193,000</div>
                     <div class="pd-variation-accordion pd-variation-expanded" id="pdVariationWrap">
                         <div class="pd-variation-inner">
                                                             <div class="pd-custom-options-group">
-                                    <p class="pd-custom-options-group-label">
-                                        シリーズ                                                                            </p>
+                                    <div class="pd-group-head">
+                                        <p class="pd-custom-options-group-label">
+                                            シリーズ                                                                                    </p>
+                                        <button type="button" class="pd-help-btn"
+        data-help-title="シリーズ"
+        data-help-text=""
+        data-help-images="[{&quot;src&quot;:&quot;/uploads/app/a3a2947a6bdaf3a8.jpg&quot;,&quot;caption&quot;:&quot;サイズ比較&quot;}]"
+        aria-label="シリーズの詳細を見る"><span class="pd-help-mark" aria-hidden="true">?</span>詳細</button>
+                                    </div>
 
                                                                             <div class="pd-custom-options-pills">
                                                                                                                                                                                                 <span class="pd-custom-options-pill">
@@ -201,8 +208,10 @@ UE：¥193,000</div>
                                                                                                                                     </div>
                                                                     </div>
                                                             <div class="pd-custom-options-group">
-                                    <p class="pd-custom-options-group-label">
-                                        仕様                                                                            </p>
+                                    <div class="pd-group-head">
+                                        <p class="pd-custom-options-group-label">
+                                            仕様                                                                                    </p>
+                                                                            </div>
 
                                                                             <div class="pd-custom-options-pills">
                                                                                                                                                                                                 <button type="button" class="pd-custom-options-pill pd-lightbox-trigger"
@@ -220,8 +229,10 @@ UE：¥193,000</div>
                                                                                                                                     </div>
                                                                     </div>
                                                             <div class="pd-custom-options-group">
-                                    <p class="pd-custom-options-group-label">
-                                        ボルトロープカラー（無地タイプ（LE）のみお選びいただけます）                                                                            </p>
+                                    <div class="pd-group-head">
+                                        <p class="pd-custom-options-group-label">
+                                            ボルトロープカラー（無地タイプ（LE）のみお選びいただけます）                                                                                    </p>
+                                                                            </div>
 
                                                                             <div class="pd-custom-options-pills">
                                                                                                                                                                                                 <button type="button" class="pd-custom-options-pill pd-lightbox-trigger"
@@ -272,8 +283,15 @@ UE：¥193,000</div>
 
                     <div class="pva-step" data-group="x1792393440590_4"
              data-react="none" data-watch="">
-            <p class="pva-label">
-                <span class="pva-num"></span>シリーズ                            </p>
+            <div class="pd-group-head">
+                <p class="pva-label">
+                    <span class="pva-num"></span>シリーズ                                    </p>
+                <button type="button" class="pd-help-btn"
+        data-help-title="シリーズ"
+        data-help-text=""
+        data-help-images="[{&quot;src&quot;:&quot;/uploads/app/a3a2947a6bdaf3a8.jpg&quot;,&quot;caption&quot;:&quot;サイズ比較&quot;}]"
+        aria-label="シリーズの詳細を見る"><span class="pd-help-mark" aria-hidden="true">?</span>詳細</button>
+            </div>
             <div class="pva-opts">
                                                         <button type="button" class="pva-opt"
                             data-label="ジェノワ シェズロン"
@@ -307,8 +325,10 @@ UE：¥193,000</div>
         </div>
                     <div class="pva-step" data-group="x1789365273380_31"
              data-react="none" data-watch="">
-            <p class="pva-label">
-                <span class="pva-num"></span>仕様                            </p>
+            <div class="pd-group-head">
+                <p class="pva-label">
+                    <span class="pva-num"></span>仕様                                    </p>
+                            </div>
             <div class="pva-opts">
                                                         <button type="button" class="pva-opt"
                             data-label="無地タイプ（LE）"
@@ -330,8 +350,10 @@ UE：¥193,000</div>
         </div>
                     <div class="pva-step" data-group="x1789365304563_34"
              data-react="filter" data-watch="x1789365273380_31">
-            <p class="pva-label">
-                <span class="pva-num"></span>ボルトロープカラー（無地タイプ（LE）のみお選びいただけます）                            </p>
+            <div class="pd-group-head">
+                <p class="pva-label">
+                    <span class="pva-num"></span>ボルトロープカラー（無地タイプ（LE）のみお選びいただけます）                                    </p>
+                            </div>
             <div class="pva-opts">
                                                         <button type="button" class="pva-opt"
                             data-label="White"
@@ -408,6 +430,17 @@ UE：¥193,000</div>
                 </div>
                 
             
+            <!-- バリエーションの項目の「？ 詳細」（components/variation-help.php）で開く小窓 -->
+            <div class="pd-lightbox pd-help" id="pdHelp" aria-hidden="true" role="dialog" aria-labelledby="pdHelpTitle">
+                <div class="pd-lightbox-backdrop" data-close="1"></div>
+                <div class="pd-help-content">
+                    <button type="button" class="pd-lightbox-close" data-close="1" aria-label="閉じる">×</button>
+                    <p class="pd-help-title" id="pdHelpTitle"></p>
+                    <p class="pd-help-text" id="pdHelpText" hidden></p>
+                    <div class="pd-help-images" id="pdHelpImages"></div>
+                </div>
+            </div>
+
             <!-- バリエーションの拡大表示 -->
             <div class="pd-lightbox" id="pdLightbox" aria-hidden="true">
                 <div class="pd-lightbox-backdrop" data-close="1"></div>

@@ -552,6 +552,33 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
     flex-shrink: 0; padding: 3px 10px; border: 1px solid var(--stone); border-radius: 14px;
     background: #fff; cursor: pointer; font-family: inherit; font-size: 10px; color: var(--ink);
 }
+/* ── バリエーションの項目名の右の「？ 詳細」（A案(1)・A案(2) の両方）── */
+.pd-group-head { display: flex; align-items: flex-start; gap: 10px; }
+.pd-group-head > p { flex: 1; min-width: 0; }
+.pd-help-btn {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 4px;
+    margin: -2px 0 6px; padding: 2px 9px 2px 3px;
+    border: 1px solid var(--fog); border-radius: 999px; background: #fff;
+    font-family: inherit; font-size: 11px; color: var(--stone); letter-spacing: .04em;
+    cursor: pointer; transition: border-color .2s, color .2s;
+}
+.pd-help-btn:hover, .pd-help-btn:focus-visible { border-color: var(--stone); color: var(--ink); }
+.pd-help-mark {
+    width: 16px; height: 16px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--warm); color: #fff; font-size: 10px; line-height: 1;
+}
+.pd-help-content {
+    position: relative; background: var(--white); padding: 24px 22px 20px;
+    width: min(92vw, 640px); max-height: 86vh; overflow-y: auto;
+}
+.pd-help-title { font-size: 14px; color: var(--ink); margin: 0 36px 12px 0; letter-spacing: .04em; }
+.pd-help-text { font-size: 13px; color: var(--ink); line-height: 1.9; margin: 0 0 14px; white-space: pre-line; }
+.pd-help-images { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.pd-help-images figure { margin: 0; }
+.pd-help-images img { display: block; width: 100%; height: auto; max-height: 60vh; object-fit: contain; background: #fff; }
+.pd-help-images figcaption { font-size: 12px; color: var(--stone); margin-top: 6px; text-align: center; }
+
 .pva-step { margin-bottom: 16px; }
 .pva-label { font-size: 12px; color: var(--ink); margin-bottom: 8px; letter-spacing: .04em; }
 .pva-note, .pva-mark { font-size: 10px; color: var(--stone); }
