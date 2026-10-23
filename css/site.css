@@ -476,7 +476,9 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 /* カタログページ上端の縦線（元テーマの .cat-hero::before）は消す（先方の要望）。
    線のぶん（56px）上の余白を詰め、「WEBカタログを見る」が最初の画面に収まるようにする */
 .cat-hero::before { display: none; }
-.cat-hero { padding-top: 48px; }
+/* 表紙の後ろだけ生成り（--paper）で、上の見出し帯・下の別紙カタログ（白）とうっすら色が違っていた。
+   要らないとのことなので白にそろえる（先方の要望） */
+.cat-hero { padding-top: 48px; background: var(--white); }
 /* 表紙は画面の高さに合わせて縮め、その下の「WEBカタログを見る」まで最初の画面に入れる。
    表紙の上（ヘッダー＋見出し帯＋余白）が約230px、表紙の下からボタンの下端まで約100px、
    下に20px残す → 表紙の高さ = 100vh − 350px。幅は A4 の比率（1:1.42）から逆算。
