@@ -608,7 +608,7 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
    ・選べない … 地を斜線で消し、文字に取り消し線。枠は点線 */
 .pva-opts { display: grid; grid-template-columns: repeat(auto-fill, minmax(156px, 1fr)); gap: 8px; }
 .pva-opt {
-    --pva-accent: #7d6646;
+    --pva-accent: #9c8159; /* 押したときの色。#7d6646 だと濃すぎるとのことで少し薄く（2026-10-28） */
     display: flex; align-items: center; gap: 8px; min-height: 42px; padding: 6px 12px;
     border: 1px solid var(--fog); border-radius: 6px; background: #fff; cursor: pointer;
     font-family: inherit; font-size: 12.5px; color: var(--ink); text-align: left; line-height: 1.35;
