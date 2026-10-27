@@ -389,6 +389,8 @@ button.pd-variation-icon-item {
 
 /* ── 生地ページ ─────────────────────────────── */
 .fabric-header { padding: 80px 48px 24px; max-width: 1100px; margin: 0 auto; }
+/* パンくずの下線と「FABRIC」の線が上下に並んで二重線に見えていた（先方の指摘）。ブランドページと同じく下線を消す */
+.fabric-header .pd-breadcrumb { border-bottom: none; background: none; padding-left: 0; padding-right: 0; }
 .fabric-title { margin-top: 0; }
 .fabric-title-material {
     font-size: 0.55em; color: var(--stone); font-weight: 400; margin-left: 6px;
