@@ -882,3 +882,22 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 @media (max-width: 768px) {
     .page-body > .pd-breadcrumb { padding-top: 20px; }
 }
+
+/* 商品名の札：80%に縮めても入らない長い名前は2行に折り返す（js/main.js の fitName が is-wrapped を付ける。2026-10-28） */
+.product-name-sm.is-wrapped, .scroll-label.is-wrapped { white-space: normal; text-align: center; }
+.product-name-sm.is-wrapped .name-fit-inner, .scroll-label.is-wrapped .name-fit-inner {
+    display: block; white-space: normal; word-break: keep-all; overflow-wrap: anywhere;
+}
+
+/* 商品写真の下のサムネイル：中央にそろえ、大きくする（先方の要望 2026-10-28）
+   左右の余白を auto にして中央へ寄せる（justify-content:center だと、あふれたときに左端が切れて戻せない） */
+.pd-gallery-thumbs-wrap { justify-content: center; min-width: 0; }
+/* サムネイルが多いとき、列（grid の項目）が中身の幅まで広がって画面からはみ出さないように */
+.pd-gallery { min-width: 0; width: 100%; box-sizing: border-box; }  /* margin:auto の grid 項目は中身の幅になるので、列の幅に合わせる */
+.pd-gallery-thumbs { flex: 0 1 auto; min-width: 0; gap: 10px; }
+.pd-gallery-thumb { width: 104px; height: 80px; flex-shrink: 0; }
+.pd-gallery-thumb:first-child { margin-left: auto; }
+.pd-gallery-thumb:last-child { margin-right: auto; }
+@media (max-width: 768px) {
+    .pd-gallery-thumb { width: 84px; height: 64px; }
+}

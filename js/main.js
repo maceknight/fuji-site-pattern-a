@@ -152,13 +152,22 @@
        商品名の自動長体（横方向の圧縮表示）
 
        商品名タグ（.product-name-sm／.scroll-label）が見切れる場合だけ、
-       内側の span に scaleX をかけて縮める。100%→90%→…→60% の
-       10%刻みで収まる最大の段階を採用し、60%でも収まらないものは
-       末尾を「…」に置き換える（仕様書 第1部2-3 の改善要望）。
+       内側の span に scaleX をかけて縮める。100%→90%→80% の
+       10%刻みで収まる最大の段階を採用する（仕様書 第1部2-3 の改善要望）。
+       80%でも収まらない長い名前は、縮めずに「・」や空白の後ろで2行に折り返す。
+       2行でも収まらなければ、2行目の末尾を「…」にする。
+       （以前は60%まで縮めていたが、横につぶれて見栄えが悪いとの指摘 2026-10-28）
        ※ scaleX をかける要素と幅を固定して切り取る要素は必ず分ける。
          同じ要素に両方かけると、縮小前の幅で先に切られてしまう。
     -------------------------------------------------------- */
-    var NAME_FIT_STEPS = [0.9, 0.8, 0.7, 0.6];
+    var NAME_FIT_STEPS = [0.9, 0.8];
+
+    // 折り返してよい位置（「・」・空白・ハイフンの後ろ）に <wbr> を入れた HTML
+    function nameWithBreaks(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML.replace(/([・\s　\-\/])/g, '$1<wbr>');
+    }
 
     function fitName(el) {
         var inner = el.querySelector(':scope > .name-fit-inner');
@@ -174,6 +183,8 @@
         inner.textContent = inner.dataset.full;
         inner.style.transform = 'none';
         inner.style.marginLeft = '0px';
+        el.classList.remove('is-wrapped');
+        el.removeAttribute('title');
 
         var boxWidth = el.clientWidth;
         if (!boxWidth) return;
@@ -183,23 +194,31 @@
 
         if (contentWidth > boxWidth) {
             var ratio = boxWidth / contentWidth;
-            scale = NAME_FIT_STEPS[NAME_FIT_STEPS.length - 1];
+            if (ratio < NAME_FIT_STEPS[NAME_FIT_STEPS.length - 1]) {
+                // 2行に折り返す（中央寄せは CSS の text-align で。scaleX を使わないのでずれない）
+                el.classList.add('is-wrapped');
+                inner.innerHTML = nameWithBreaks(inner.dataset.full);
+                var maxHeight = parseFloat(getComputedStyle(el).lineHeight) * 2 + 1;
+                inner.style.wordBreak = '';
+                if (inner.offsetHeight > maxHeight) {
+                    // 区切りの位置だけでは3行になるときは、語の途中でも折り返す
+                    inner.style.wordBreak = 'normal';
+                }
+                if (inner.offsetHeight > maxHeight) {
+                    var text = inner.dataset.full;
+                    while (text.length > 1 && inner.offsetHeight > maxHeight) {
+                        text = text.slice(0, -1);
+                        inner.innerHTML = nameWithBreaks(text) + '…';
+                    }
+                    el.title = inner.dataset.full;
+                }
+                return;
+            }
             for (var i = 0; i < NAME_FIT_STEPS.length; i++) {
                 if (NAME_FIT_STEPS[i] <= ratio) { scale = NAME_FIT_STEPS[i]; break; }
             }
             inner.style.transformOrigin = 'left center';
             inner.style.transform = 'scaleX(' + scale + ')';
-
-            // 下限の60%でも収まらない場合は末尾を省略する
-            if (contentWidth * scale > boxWidth) {
-                var text = inner.dataset.full;
-                while (text.length > 1 && inner.scrollWidth * scale > boxWidth) {
-                    text = text.slice(0, -1);
-                    inner.textContent = text + '…';
-                }
-                el.title = inner.dataset.full;
-            }
-            contentWidth = inner.scrollWidth;
         }
 
         // 中央寄せは text-align に頼らず計算する（scaleX と併用すると左へずれるため）
@@ -333,7 +352,12 @@
         var next = wrap.querySelector('.pd-scroll-btn--next');
         if (!scroller) return;
 
-        function amount() { return itemW * step; }
+        // 1枚ぶんの幅は実際の大きさから取る（CSS でサムネイルの大きさを変えても送り幅がずれないように）
+        function amount() {
+            var first = scroller.firstElementChild;
+            var gap = parseFloat(getComputedStyle(scroller).columnGap) || 0;
+            return (first ? first.offsetWidth + gap : itemW) * step;
+        }
         function max() { return scroller.scrollWidth - scroller.clientWidth; }
 
         if (prev) prev.addEventListener('click', function () {
