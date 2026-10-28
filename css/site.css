@@ -459,8 +459,8 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
     display: block; font-size: 13px; color: var(--stone); letter-spacing: 0.06em; margin-top: 2px;
     font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1;
 }
-/* 節目の年（key）は、元テーマだと小さい灰色で逆に目立たなかったので、本文と同じ大きさで少し強める */
-.history-desc span { font-size: 13px; color: var(--ink); letter-spacing: 0; font-weight: 500; }
+/* 沿革の前置き（「明治の初期　…」。現行サイトと同じく年表の前の文章） */
+.history-intro { font-size: 13px; line-height: 2; color: var(--ink); margin: 0 0 28px; }
 
 /* ── お問い合わせ ─────────────────────────────── */
 .cf-error {
@@ -779,6 +779,31 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
     .catalog-banner-cover { margin-left: -32px; }
     .catalog-banner-ribbon { padding-right: 40px; }
 }
+/* ── 2026-10-28 先方の指定で作り直し ──
+   ボタンの幅を中身に合わせて縮め、表紙は「→」のすぐ右に、ボタン（リボン）の中に収める（はみ出さない）。
+   上の重ね方の指定は、ここで打ち消す */
+.catalog-banner {
+    display: inline-flex; align-items: center; gap: 14px;
+    width: auto; max-width: 100%; padding: 10px 14px 10px 26px;
+    background: linear-gradient(120deg, #eef3f8 0%, #d9e5ef 100%);
+    border-radius: 999px; box-shadow: 0 3px 10px rgba(80,100,130,0.14);
+}
+.catalog-banner-ribbon {
+    flex: 0 0 auto; padding: 0; background: none; border-radius: 0; box-shadow: none;
+}
+.catalog-banner-cover { width: 40px; margin: 0; box-shadow: 0 2px 6px rgba(60,70,90,0.18); }
+@media (max-width: 420px) {
+    .catalog-banner { gap: 10px; padding: 8px 12px 8px 20px; }
+    .catalog-banner-ribbon { padding: 0; }
+    .catalog-banner-cover { width: 34px; margin: 0; }
+}
+@media (max-width: 330px) {
+    .catalog-banner-ribbon { padding: 0; }
+    .catalog-banner-cover { width: 30px; margin: 0; }
+}
+
+/* トップの3枚の写真（カテゴリ）：リンクの下線が写真の下の文字に青く出ていた */
+.hp-product-card { text-decoration: none; color: inherit; }
 
 /* ── 会社概要の表：細い画面では見出しの下に値を置く ──
    現行サイトに合わせて経歴・歴代経営者など長い項目が増えたため、横並びのままだと値の列が細く折り返しだらけになる */
