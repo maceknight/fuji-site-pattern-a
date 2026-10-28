@@ -864,3 +864,11 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
     .about-table th { padding: 14px 0 2px; }
     .about-table td { padding: 0 0 14px; }
 }
+
+/* ── ヘッダー左上のロゴ画像（先方の指定 2026-10-28）──
+   元の画像が 160×40 なので、それより大きくはしない（ぼやける） */
+.nav-logo--image { display: block; line-height: 0; letter-spacing: 0; }
+.nav-logo--image img { display: block; width: 160px; height: auto; }
+@media (max-width: 768px) {
+    .nav-logo--image img { width: 136px; }
+}
