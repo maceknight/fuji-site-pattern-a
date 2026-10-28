@@ -660,6 +660,15 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
     background: #fff;
     box-shadow: inset 0 0 0 1px var(--stone);
 }
+/* 2026-10-28 先方の要望：枠は Brand の行と同じ白に（生成りの線を消す）。
+   マウスを乗せたときは、背景の色は変えず（白い背景の写真が浮いて見えるため）、その写真の枠だけ濃いめの茶色にする。
+   行全体ではなく、乗せた1枚だけが変わる */
+.scroll-thumb--contain,
+.product-thumb--contain,
+.cat-scroll-area:hover .scroll-thumb--contain,
+.product-card:hover .product-thumb--contain { background: #fff; box-shadow: none; transition: box-shadow .15s; }
+.scroll-item:hover .scroll-thumb--contain,
+.product-card:hover .product-thumb--contain { box-shadow: inset 0 0 0 2px #7d6646; }
 /* 写真が枠いっぱいだと、白い縁が生成りの線に被って線が途切れて見える。周りに少し余白を取る
    （ブランドのある枠は、上の帯の分を空けた別の指定が後ろ＝上で効く） */
 .scroll-thumb--contain > img,
