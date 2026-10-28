@@ -869,6 +869,16 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
    元の画像が 160×40 なので、それより大きくはしない（ぼやける） */
 .nav-logo--image { display: block; line-height: 0; letter-spacing: 0; }
 .nav-logo--image img { display: block; width: 160px; height: auto; }
+/* ヘッダーの高さは 61px のまま（.page-body の上の余白や sticky の位置が 61px 前提）。
+   ロゴが文字より高いぶん、上下の余白を詰める（40 + 10×2 + 線1 = 61） */
+.site-nav { padding-top: 10px; padding-bottom: 10px; }
 @media (max-width: 768px) {
     .nav-logo--image img { width: 136px; }
+    .site-nav { padding-top: 13px; padding-bottom: 13px; }  /* 34 + 13×2 + 1 = 61 */
+}
+
+/* 商品詳細のパンくず：ヘッダーのすぐ下に詰まって見えたので、上に余白を足す（先方の指摘 2026-10-28） */
+.page-body > .pd-breadcrumb { padding-top: 26px; }
+@media (max-width: 768px) {
+    .page-body > .pd-breadcrumb { padding-top: 20px; }
 }
