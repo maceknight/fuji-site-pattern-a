@@ -396,10 +396,10 @@ button.pd-variation-icon-item {
     font-size: 0.55em; color: var(--stone); font-weight: 400; margin-left: 6px;
 }
 .fabric-desc {
-    font-size: 13px; color: var(--stone); line-height: 1.9; margin-top: 12px;
+    font-size: 13px; color: var(--stone); line-height: 1.9; margin-top: 20px;
     white-space: pre-line;
 }
-.fabric-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.fabric-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .fabric-tab {
     padding: 8px 16px; border-radius: 999px; font-size: 12px;
     text-decoration: none; border: 1px solid var(--fog); color: var(--stone);
@@ -426,6 +426,8 @@ button.pd-variation-icon-item {
 .fabric-note { font-size: 11px; color: var(--stone); margin-top: 40px; }
 @media (max-width: 768px) {
     .fabric-header { padding: 48px 24px 16px; }
+    /* スマホでは生地名が1行のもの（サマーシールド）と2行のものがあり、下のタブの位置がずれる。タブがあるときは2行分の高さを取っておく */
+    .fabric-header.has-tabs .fabric-title { min-height: 2lh; }
     .fabric-body { padding: 16px 24px 56px; }
     .fabric-color-grid { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 16px; }
 }
