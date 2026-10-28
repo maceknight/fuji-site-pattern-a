@@ -901,3 +901,9 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 @media (max-width: 768px) {
     .pd-gallery-thumb { width: 84px; height: 64px; }
 }
+
+/* 関連商品のカード：写真の枠を正方形にそろえ、名前は2行ぶんの高さを取ってカードの高さをそろえる（先方の要望 2026-10-28） */
+.pd-related-card-img { aspect-ratio: 1 / 1; height: auto; padding: 10px; box-sizing: border-box; background: #fff; }
+.pd-related-card-name {
+    min-height: 3em; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+}
