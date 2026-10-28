@@ -71,36 +71,38 @@
         </p>
         <form action="products.html" method="get" role="search" id="productSearch"
               data-fields="{&quot;&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;phi&quot;:&quot;Φ(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;parasol-and-market-umbrella&quot;:{&quot;phi&quot;:&quot;サイズ Φ(mm)&quot;,&quot;h&quot;:&quot;総高 H(mm)&quot;},&quot;base&quot;:{&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;eye-catch-item&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;phi&quot;:&quot;Φ(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;day-bed&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;chaise&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;dining-chair&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;lounge-chair-and-sofa&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;high-chair&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;bench&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;stool&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;ottoman&quot;:{&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;dining-table&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;lounge-table&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;side-table&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;high-table&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;table-top&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;table-leg&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;},&quot;other&quot;:{&quot;w&quot;:&quot;W(mm)&quot;,&quot;d&quot;:&quot;D(mm)&quot;,&quot;h&quot;:&quot;H(mm)&quot;,&quot;sh&quot;:&quot;SH(mm)&quot;,&quot;phi&quot;:&quot;Φ(mm)&quot;,&quot;kg&quot;:&quot;重量(kg)&quot;}}">
-            <div class="search-wrap">
-                <span class="search-icon" aria-hidden="true">⌕</span>
-                <input type="search" name="q" value=""
-                       placeholder="品番・商品名・ブランド名で検索" aria-label="製品を検索">
+                        <div class="search-bar">
+                <div class="search-wrap">
+                    <span class="search-icon" aria-hidden="true">⌕</span>
+                    <input type="search" name="q" value=""
+                           placeholder="品番・商品名・ブランド名で検索" aria-label="製品を検索">
+                </div>
+                <select name="cat" id="searchCat" class="search-cat" aria-label="カテゴリ">
+                    <option value="">すべてのカテゴリ</option>
+                                            <option value="parasol-and-market-umbrella">Parasol ＆ Market Umbrella</option>
+                                            <option value="base">Base</option>
+                                            <option value="eye-catch-item">Eye-catch Item</option>
+                                            <option value="day-bed">Day Bed</option>
+                                            <option value="chaise">Chaise</option>
+                                            <option value="dining-chair">Dining Chair</option>
+                                            <option value="lounge-chair-and-sofa">Lounge Chair＆Sofa</option>
+                                            <option value="high-chair">High Chair</option>
+                                            <option value="bench">Bench</option>
+                                            <option value="stool">Stool</option>
+                                            <option value="ottoman">Ottoman</option>
+                                            <option value="dining-table">Dining Table</option>
+                                            <option value="lounge-table">Lounge Table</option>
+                                            <option value="side-table">Side Table</option>
+                                            <option value="high-table">High Table</option>
+                                            <option value="table-top">Table Top</option>
+                                            <option value="table-leg">Table Leg</option>
+                                            <option value="other">Other</option>
+                                    </select>
+                <button type="submit" class="search-submit">検索</button>
             </div>
-                        <div class="search-filters">
-                <label class="search-filter">
-                    <span>カテゴリ</span>
-                    <select name="cat" id="searchCat">
-                        <option value="">すべて</option>
-                                                    <option value="parasol-and-market-umbrella">Parasol ＆ Market Umbrella</option>
-                                                    <option value="base">Base</option>
-                                                    <option value="eye-catch-item">Eye-catch Item</option>
-                                                    <option value="day-bed">Day Bed</option>
-                                                    <option value="chaise">Chaise</option>
-                                                    <option value="dining-chair">Dining Chair</option>
-                                                    <option value="lounge-chair-and-sofa">Lounge Chair＆Sofa</option>
-                                                    <option value="high-chair">High Chair</option>
-                                                    <option value="bench">Bench</option>
-                                                    <option value="stool">Stool</option>
-                                                    <option value="ottoman">Ottoman</option>
-                                                    <option value="dining-table">Dining Table</option>
-                                                    <option value="lounge-table">Lounge Table</option>
-                                                    <option value="side-table">Side Table</option>
-                                                    <option value="high-table">High Table</option>
-                                                    <option value="table-top">Table Top</option>
-                                                    <option value="table-leg">Table Leg</option>
-                                                    <option value="other">Other</option>
-                                            </select>
-                </label>
+            <details class="search-more">
+                <summary>サイズ・重量で絞り込む</summary>
+                <div class="search-filters">
                 <div class="search-ranges" id="searchRanges">
                                             <div class="search-filter">
                             <span>W(mm)</span>
@@ -151,8 +153,8 @@
                             </div>
                         </div>
                                     </div>
-                <button type="submit" class="search-submit">検索</button>
-            </div>
+                </div>
+            </details>
         </form>
     </div>
 
