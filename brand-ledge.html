@@ -130,14 +130,15 @@
 <div id="staticPreviewNote" style="position:fixed;left:12px;bottom:12px;z-index:3000;max-width:300px;
   background:#1a1a18;color:#c8b89a;font:11px/1.7 'Noto Sans JP',sans-serif;letter-spacing:.04em;
   padding:9px 14px;border:1px solid #c8b89a;opacity:.94;">
-  見た目確認用のプレビューです。<br>検索・絞り込み・お問い合わせ・管理画面は動きません。
+  見た目確認用のプレビューです。<br>お問い合わせの送信・管理画面は動きません。
   <button type="button" onclick="this.parentNode.remove()" aria-label="閉じる"
     style="background:none;border:none;color:#c8b89a;cursor:pointer;margin-left:6px;font-size:13px;">×</button>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // 静的なコピーではフォームはどれも送れない（検索も、お問い合わせも）
-  document.querySelectorAll('form input, form select, form textarea, form button')
+  // 静的なコピーではフォームは送れない（お問い合わせなど）。
+  // 製品一覧の検索（#productSearch）だけは js/static-search.js がブラウザの中で動かすので止めない
+  document.querySelectorAll('form:not(#productSearch) input, form:not(#productSearch) select, form:not(#productSearch) textarea, form:not(#productSearch) button')
     .forEach(function (el) { el.disabled = true; el.title = '見た目確認用のため、動きません'; });
 });
 </script>

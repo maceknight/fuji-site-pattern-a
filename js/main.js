@@ -210,6 +210,8 @@
     function fitNamesWithin(container) {
         container.querySelectorAll('.product-name-sm, .scroll-label').forEach(fitName);
     }
+    // 公開プレビューの検索（tools/static/static-search.js）が、あとから足した商品カードの名前にも使う
+    window.fujiFitNames = fitNamesWithin;
 
     function initNameFit() {
         if (!document.querySelector('.product-name-sm, .scroll-label')) return;
