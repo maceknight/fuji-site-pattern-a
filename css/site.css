@@ -834,6 +834,11 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
     .catalog-banner-ribbon { padding: 0; }
     .catalog-banner-cover { width: 30px; margin: 0; }
 }
+/* 表紙をもう少し左へ（先方の指摘 2026-10-28）。「→」との間を詰め、そのぶんボタンの右端に余白を残す */
+.catalog-banner { gap: 6px; padding-right: 22px; }
+@media (max-width: 420px) {
+    .catalog-banner { gap: 5px; padding-right: 18px; }
+}
 
 /* トップの3枚の写真（カテゴリ）：リンクの下線が写真の下の文字に青く出ていた */
 .hp-product-card { text-decoration: none; color: inherit; }
