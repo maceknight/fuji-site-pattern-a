@@ -573,10 +573,14 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
     background: var(--warm); color: #fff; font-size: 10px; line-height: 1;
 }
 .pd-help-content {
-    position: relative; background: var(--white); padding: 24px 22px 20px;
-    width: min(92vw, 640px); max-height: 86vh; overflow-y: auto;
+    position: relative; background: var(--white); padding: 44px 22px 20px;
+    width: min(94vw, 1080px); max-height: 92vh; overflow-y: auto;
 }
-.pd-help-title { font-size: 14px; color: var(--ink); margin: 0 36px 12px 0; letter-spacing: .04em; }
+/* 見出し（項目名）は画面には出さない（先方の要望 2026-10-30）。読み上げ用に残す */
+.pd-help-title {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+}
 .pd-help-text { font-size: 13px; color: var(--ink); line-height: 1.9; margin: 0 0 14px; white-space: pre-line; }
 .pd-help-links { margin: 0 0 14px; }
 .pd-help-links-label { font-size: 12px; color: var(--stone); margin: 0 0 8px; }
@@ -586,9 +590,9 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
     font-size: 12px; color: var(--ink); text-decoration: none; background: #fff;
 }
 .pd-help-links a:hover { border-color: var(--stone); }
-.pd-help-images { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.pd-help-images { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
 .pd-help-images figure { margin: 0; }
-.pd-help-images img { display: block; width: 100%; height: auto; max-height: 60vh; object-fit: contain; background: #fff; }
+.pd-help-images img { display: block; width: 100%; height: auto; max-height: 80vh; object-fit: contain; background: #fff; }
 .pd-help-images figcaption { font-size: 12px; color: var(--stone); margin-top: 6px; text-align: center; }
 
 .pva-step { margin-bottom: 16px; }
