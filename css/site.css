@@ -907,3 +907,6 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 .pd-related-card-name {
     min-height: 3em; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
 }
+
+/* 生地ページのシリーズの見出しへ直接飛んだとき（#series-panama など）、固定ヘッダーの下に隠れないように */
+.fabric-series-name { scroll-margin-top: 80px; }
