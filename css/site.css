@@ -701,6 +701,13 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 .product-thumb--contain.has-brand > img {
     left: 7%; top: 30%; width: 86%; height: 63%;
 }
+/* 2026-10-31 先方の要望「全ての商品のサイズ感を同じくらいに」：写真を正方形にそろえたので、
+   ブランドのある枠も、ロゴ（高さ 17%）のすぐ下から写真を置き、ブランドのない枠との大きさの差を詰める。
+   縦長のロゴ（tesoro）は帯が 30% あるので、そのまま */
+.scroll-thumb--contain.has-brand:not(:has(.product-brand-tag--tall)) > img,
+.product-thumb--contain.has-brand:not(:has(.product-brand-tag--tall)) > img {
+    top: 23%; height: 74%;
+}
 
 /* 縦長のロゴ（tesoro）：横長前提の枠だと高さで縮んで豆粒になり、枠の中央に寄って位置もずれていた。
    ロゴ帯（写真の上 30%）の高さいっぱいを使い、ほかのロゴと同じく左上に揃える */
