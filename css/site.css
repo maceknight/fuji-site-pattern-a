@@ -925,7 +925,7 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 .fabric-series-name { scroll-margin-top: 80px; }
 
 /* ── ヘッダー「製品」のメニュー（先方の要望 2026-11-01）──
-   「製品」にカーソルを乗せると、ヘッダーのすぐ下に黒い帯が出て、大分類が横に並ぶ（入りきらなければ折り返す）。
+   「製品」にカーソルを乗せると、ヘッダーのすぐ下に黒い帯が出て、商品のくくり（6つ）が横に並ぶ。
    「製品」の項目をヘッダーの上下いっぱいまでのばし、帯へカーソルを動かす途中で閉じないようにしている */
 .nav-has-mega { padding: 24px 0; margin: -24px 0; }
 .nav-mega {
@@ -947,17 +947,17 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 .nav-has-mega:hover > a, .nav-has-mega:focus-within > a { color: var(--warm); }
 .nav-mega-list {
     list-style: none;
-    display: flex; flex-wrap: wrap; gap: 10px 34px;
+    display: flex; flex-wrap: wrap; gap: 10px 44px;
 }
 .nav-links .nav-mega-list a {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 15px; font-weight: 300; letter-spacing: 0.06em;
+    font-size: 16px; font-weight: 300; letter-spacing: 0.08em;
     color: rgba(250,249,247,0.78); white-space: nowrap;
 }
 .nav-links .nav-mega-list a:hover,
 .nav-links .nav-mega-list a:focus-visible { color: var(--warm); }
 
-/* スマートフォンの引き出しでは、「製品」の下に大分類を2列で */
+/* スマートフォンの引き出しでは、「製品」の下にくくりを2列で */
 .nav-drawer { max-height: calc(100vh - 57px); overflow-y: auto; }
 .nav-drawer-sub {
     display: grid; grid-template-columns: 1fr 1fr;
@@ -969,25 +969,10 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
     color: rgba(250,249,247,0.65);
 }
 
-/* ヘッダーのメニューから #cat-xxx へ移動したとき、固定ヘッダーの下に隠れないように */
+/* ヘッダーのメニューから #grp-xxx・#cat-xxx へ移動したとき、固定ヘッダーの下に隠れないように */
 .cat-block { scroll-margin-top: 61px; }
 
-/* ── TOP：商品の大分類のカード（先方の要望 2026-11-01。もとは代表3つ）──
-   全部の大分類を並べるので、カードを小さくして横に6枚 */
-.hp-products-grid--all { grid-template-columns: repeat(6, 1fr); gap: 16px; }
-.hp-products-grid--all .hp-product-info { padding: 12px 14px 14px; }
-.hp-products-grid--all .hp-product-name { font-size: 17px; line-height: 1.3; margin-bottom: 4px; }
-.hp-products-grid--all .hp-product-price { font-size: 11px; }
-/* 写真が先頭の商品のとき（カテゴリ画像が未登録）は、切らずに白地に収める */
-.hp-product-img--item .hp-product-img-photo { object-fit: contain; padding: 8%; box-sizing: border-box; }
-.hp-products-grid--all .hp-product-card { outline: 2px solid transparent; outline-offset: -2px; transition: outline-color .15s; }
-.hp-products-grid--all .hp-product-card:hover { outline-color: #7d6646; }
-@media (max-width: 1200px) {
-    .hp-products-grid--all { grid-template-columns: repeat(4, 1fr); }
-}
-@media (max-width: 900px) {
-    .hp-products-grid--all { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 768px) {
-    .hp-products-grid--all { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-}
+/* ── TOP：商品のくくりのカード（先方の要望 2026-11-01。もとは代表カテゴリ3つ）──
+   6枚を元の3列のまま並べる。写真は設置例なので、乗せたときに少しだけ寄る */
+.hp-product-img-photo { transition: transform .6s ease; }
+.hp-product-card:hover .hp-product-img-photo { transform: scale(1.04); }

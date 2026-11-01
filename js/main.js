@@ -36,28 +36,39 @@
     }
 
     /* --------------------------------------------------------
-       ヘッダー「製品」の大分類メニュー
-       製品一覧にいるときに押すと、ページは読み直されず # だけ変わる。
-       その行を開いてから移動し、メニュー（スマートフォンは引き出し）を閉じる
+       ヘッダー「製品」のメニュー・TOPページのカード
+       #cat-xxx は大分類の行1つ、#grp-xxx はくくり（Chair など）に入る大分類の行を全部開く。
+       製品一覧にいるときに押すと、ページは読み直されず # だけ変わるので、
+       行を開いてから移動し、メニュー（スマートフォンは引き出し）を閉じる
     -------------------------------------------------------- */
+    function catBlocksFor(hash) {
+        if (hash.indexOf('#grp-') === 0) {
+            return Array.prototype.slice.call(
+                document.querySelectorAll('.cat-block[data-group="' + hash.slice(5) + '"]'));
+        }
+        var block = hash.indexOf('#cat-') === 0 ? document.getElementById(hash.slice(1)) : null;
+        return block && block.classList.contains('cat-block') ? [block] : [];
+    }
+
     function initNavCategoryLinks() {
         var mega   = document.querySelector('.nav-has-mega');
         var toggle = document.getElementById('navToggle');
         var drawer = document.getElementById('navDrawer');
         document.addEventListener('click', function (e) {
-            var link = e.target.closest('a[href*="#cat-"]');
+            var link = e.target.closest('a[href*="#cat-"], a[href*="#grp-"]');
             if (!link) return;
             var url = new URL(link.href, window.location.href);
             if (url.pathname !== window.location.pathname) return;
-            var block = document.getElementById(url.hash.slice(1));
-            if (!block || !block.classList.contains('cat-block')) return;
+            var blocks = catBlocksFor(url.hash);
+            if (!blocks.length) return;
             e.preventDefault();
-            if (!block.classList.contains('expanded')) {
+            blocks.forEach(function (block) {
+                if (block.classList.contains('expanded')) return;
                 var row = block.querySelector(':scope > .cat-title-row');
                 if (row) row.click();
-            }
+            });
             history.replaceState(null, '', url.hash);
-            block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            blocks[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
             if (mega && mega.contains(link)) {
                 mega.classList.add('is-closed');
                 link.blur();
@@ -68,6 +79,19 @@
             }
             if (drawer && toggle && !drawer.hasAttribute('hidden')) toggle.click();
         });
+        // ほかのページから #grp-xxx 付きで来たとき：その id の要素は無いのでブラウザは動かない。
+        // 読み込みが終わってから（行が開き、ブラウザがスクロール位置を戻したあと）先頭の行まで移動する
+        if (window.location.hash.indexOf('#grp-') === 0) {
+            var goToGroup = function () {
+                var blocks = catBlocksFor(window.location.hash);
+                if (blocks.length) blocks[0].scrollIntoView({ block: 'start', behavior: 'instant' });
+            };
+            if (document.readyState === 'complete') {
+                window.setTimeout(goToGroup, 0);
+            } else {
+                window.addEventListener('load', function () { window.setTimeout(goToGroup, 0); });
+            }
+        }
     }
 
     /* --------------------------------------------------------
@@ -163,8 +187,9 @@
                 if (isHovering) { armTimer(); } else { resetScroll(); }
             });
 
-            // TOPページから #cat-xxx 付きで来たときは、その行だけ開いておく
-            if (window.location.hash && window.location.hash.slice(1) === block.id) {
+            // TOPページ・ヘッダーから #cat-xxx 付きで来たときはその行だけ、#grp-xxx ならくくりに入る行を開いておく
+            if (window.location.hash && (window.location.hash.slice(1) === block.id
+                    || window.location.hash === '#grp-' + block.getAttribute('data-group'))) {
                 block.classList.add('expanded');
                 if (titleRow) titleRow.setAttribute('aria-expanded', 'true');
             }
