@@ -36,6 +36,41 @@
     }
 
     /* --------------------------------------------------------
+       ヘッダー「製品」の大分類メニュー
+       製品一覧にいるときに押すと、ページは読み直されず # だけ変わる。
+       その行を開いてから移動し、メニュー（スマートフォンは引き出し）を閉じる
+    -------------------------------------------------------- */
+    function initNavCategoryLinks() {
+        var mega   = document.querySelector('.nav-has-mega');
+        var toggle = document.getElementById('navToggle');
+        var drawer = document.getElementById('navDrawer');
+        document.addEventListener('click', function (e) {
+            var link = e.target.closest('a[href*="#cat-"]');
+            if (!link) return;
+            var url = new URL(link.href, window.location.href);
+            if (url.pathname !== window.location.pathname) return;
+            var block = document.getElementById(url.hash.slice(1));
+            if (!block || !block.classList.contains('cat-block')) return;
+            e.preventDefault();
+            if (!block.classList.contains('expanded')) {
+                var row = block.querySelector(':scope > .cat-title-row');
+                if (row) row.click();
+            }
+            history.replaceState(null, '', url.hash);
+            block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (mega && mega.contains(link)) {
+                mega.classList.add('is-closed');
+                link.blur();
+                mega.addEventListener('mouseleave', function reopen() {
+                    mega.classList.remove('is-closed');
+                    mega.removeEventListener('mouseleave', reopen);
+                });
+            }
+            if (drawer && toggle && !drawer.hasAttribute('hidden')) toggle.click();
+        });
+    }
+
+    /* --------------------------------------------------------
        商品一覧：カテゴリ行の開閉と横スクロール
 
        ・閉じている時 … 横スクロールのプレビュー行（.cat-scroll-area）
@@ -814,6 +849,7 @@
 
     ready(function () {
         initNav();
+        initNavCategoryLinks();
         initCategoryBlocks();
         initNameFit();
         initNewsModal();

@@ -923,3 +923,71 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 
 /* 生地ページのシリーズの見出しへ直接飛んだとき（#series-panama など）、固定ヘッダーの下に隠れないように */
 .fabric-series-name { scroll-margin-top: 80px; }
+
+/* ── ヘッダー「製品」のメニュー（先方の要望 2026-11-01）──
+   「製品」にカーソルを乗せると、ヘッダーのすぐ下に黒い帯が出て、大分類が横に並ぶ（入りきらなければ折り返す）。
+   「製品」の項目をヘッダーの上下いっぱいまでのばし、帯へカーソルを動かす途中で閉じないようにしている */
+.nav-has-mega { padding: 24px 0; margin: -24px 0; }
+.nav-mega {
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--ink);
+    border-top: 1px solid rgba(200,184,154,0.15);
+    border-bottom: 1px solid rgba(200,184,154,0.15);
+    padding: 16px 48px 18px;
+    opacity: 0; visibility: hidden;
+    transition: opacity .15s, visibility 0s .15s;
+}
+.nav-mega::before { content: ''; position: absolute; left: 0; right: 0; top: -6px; height: 6px; }
+.nav-has-mega:hover > .nav-mega,
+.nav-has-mega:focus-within > .nav-mega {
+    opacity: 1; visibility: visible; transition: opacity .15s, visibility 0s;
+}
+/* メニューを押したあと（同じページ内で移動したとき）は、カーソルが外れるまで閉じておく */
+.nav-has-mega.is-closed > .nav-mega { opacity: 0; visibility: hidden; }
+.nav-has-mega:hover > a, .nav-has-mega:focus-within > a { color: var(--warm); }
+.nav-mega-list {
+    list-style: none;
+    display: flex; flex-wrap: wrap; gap: 10px 34px;
+}
+.nav-links .nav-mega-list a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 300; letter-spacing: 0.06em;
+    color: rgba(250,249,247,0.78); white-space: nowrap;
+}
+.nav-links .nav-mega-list a:hover,
+.nav-links .nav-mega-list a:focus-visible { color: var(--warm); }
+
+/* スマートフォンの引き出しでは、「製品」の下に大分類を2列で */
+.nav-drawer { max-height: calc(100vh - 57px); overflow-y: auto; }
+.nav-drawer-sub {
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding: 4px 24px 14px; border-bottom: 1px solid rgba(200,184,154,0.08);
+}
+.nav-drawer .nav-drawer-sub a {
+    padding: 8px 0; border-bottom: none;
+    font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 0.04em;
+    color: rgba(250,249,247,0.65);
+}
+
+/* ヘッダーのメニューから #cat-xxx へ移動したとき、固定ヘッダーの下に隠れないように */
+.cat-block { scroll-margin-top: 61px; }
+
+/* ── TOP：商品の大分類のカード（先方の要望 2026-11-01。もとは代表3つ）──
+   全部の大分類を並べるので、カードを小さくして横に6枚 */
+.hp-products-grid--all { grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.hp-products-grid--all .hp-product-info { padding: 12px 14px 14px; }
+.hp-products-grid--all .hp-product-name { font-size: 17px; line-height: 1.3; margin-bottom: 4px; }
+.hp-products-grid--all .hp-product-price { font-size: 11px; }
+/* 写真が先頭の商品のとき（カテゴリ画像が未登録）は、切らずに白地に収める */
+.hp-product-img--item .hp-product-img-photo { object-fit: contain; padding: 8%; box-sizing: border-box; }
+.hp-products-grid--all .hp-product-card { outline: 2px solid transparent; outline-offset: -2px; transition: outline-color .15s; }
+.hp-products-grid--all .hp-product-card:hover { outline-color: #7d6646; }
+@media (max-width: 1200px) {
+    .hp-products-grid--all { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 900px) {
+    .hp-products-grid--all { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+    .hp-products-grid--all { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
