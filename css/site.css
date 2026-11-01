@@ -925,37 +925,54 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 .fabric-series-name { scroll-margin-top: 80px; }
 
 /* ── ヘッダー「製品」のメニュー（先方の要望 2026-11-01）──
-   「製品」にカーソルを乗せると、ヘッダーのすぐ下に黒い帯が出て、商品のくくり（6つ）が横に並ぶ。
-   「製品」の項目をヘッダーの上下いっぱいまでのばし、帯へカーソルを動かす途中で閉じないようにしている */
+   「製品」にカーソルを乗せると、そのすぐ下にパネルが出て、商品のくくり（6つ）が写真つきで3列×2段に並ぶ。
+   最初は画面の左端から横一列に並べていたが、「製品」（右側）から遠く使いづらかったので、
+   パネルの右端をヘッダーの文字の右端にそろえ、「製品」の真下あたりに収める。
+   「製品」の項目をヘッダーの上下いっぱいまでのばし、パネルへカーソルを動かす途中で閉じないようにしている */
 .nav-has-mega { padding: 24px 0; margin: -24px 0; }
 .nav-mega {
-    position: absolute; top: 100%; left: 0; right: 0;
+    position: absolute; top: 100%; right: 48px;
+    width: 600px; max-width: calc(100vw - 96px); box-sizing: border-box;
     background: var(--ink);
-    border-top: 1px solid rgba(200,184,154,0.15);
-    border-bottom: 1px solid rgba(200,184,154,0.15);
-    padding: 16px 48px 18px;
-    opacity: 0; visibility: hidden;
-    transition: opacity .15s, visibility 0s .15s;
+    border: 1px solid rgba(200,184,154,0.18); border-top: none;
+    padding: 18px 18px 14px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity .15s, transform .15s, visibility 0s .15s;
 }
-.nav-mega::before { content: ''; position: absolute; left: 0; right: 0; top: -6px; height: 6px; }
+.nav-mega::before { content: ''; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
 .nav-has-mega:hover > .nav-mega,
 .nav-has-mega:focus-within > .nav-mega {
-    opacity: 1; visibility: visible; transition: opacity .15s, visibility 0s;
+    opacity: 1; visibility: visible; transform: none;
+    transition: opacity .15s, transform .15s, visibility 0s;
 }
 /* メニューを押したあと（同じページ内で移動したとき）は、カーソルが外れるまで閉じておく */
 .nav-has-mega.is-closed > .nav-mega { opacity: 0; visibility: hidden; }
 .nav-has-mega:hover > a, .nav-has-mega:focus-within > a { color: var(--warm); }
 .nav-mega-list {
     list-style: none;
-    display: flex; flex-wrap: wrap; gap: 10px 44px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 12px;
 }
-.nav-links .nav-mega-list a {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px; font-weight: 300; letter-spacing: 0.08em;
-    color: rgba(250,249,247,0.78); white-space: nowrap;
+.nav-links .nav-mega-item { display: block; color: rgba(250,249,247,0.82); letter-spacing: 0; }
+.nav-mega-item img {
+    display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover;
+    opacity: .85; transition: opacity .2s;
 }
-.nav-links .nav-mega-list a:hover,
-.nav-links .nav-mega-list a:focus-visible { color: var(--warm); }
+.nav-mega-name {
+    display: block; margin-top: 8px;
+    font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; letter-spacing: 0.06em;
+}
+.nav-mega-count { display: block; margin-top: 1px; font-size: 10px; letter-spacing: 0.1em; color: rgba(250,249,247,0.45); }
+.nav-links .nav-mega-item:hover,
+.nav-links .nav-mega-item:focus-visible { color: var(--warm); }
+.nav-mega-item:hover img,
+.nav-mega-item:focus-visible img { opacity: 1; }
+.nav-links .nav-mega-all {
+    display: block; margin-top: 14px; padding-top: 12px; text-align: right;
+    border-top: 1px solid rgba(200,184,154,0.12);
+    font-size: 11px; letter-spacing: 0.15em; color: rgba(250,249,247,0.6);
+}
+.nav-links .nav-mega-all:hover { color: var(--warm); }
 
 /* スマートフォンの引き出しでは、「製品」の下にくくりを2列で */
 .nav-drawer { max-height: calc(100vh - 57px); overflow-y: auto; }
