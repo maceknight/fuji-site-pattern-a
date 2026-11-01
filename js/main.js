@@ -80,8 +80,9 @@
             if (drawer && toggle && !drawer.hasAttribute('hidden')) toggle.click();
         });
         // ほかのページから #grp-xxx 付きで来たとき：その id の要素は無いのでブラウザは動かない。
+        // #cat-xxx も、ブラウザの移動は行が開く前・写真が並ぶ前の位置になることがあるので同じように扱う。
         // 読み込みが終わってから（行が開き、ブラウザがスクロール位置を戻したあと）先頭の行まで移動する
-        if (window.location.hash.indexOf('#grp-') === 0) {
+        if (/^#(grp|cat)-/.test(window.location.hash)) {
             var goToGroup = function () {
                 var blocks = catBlocksFor(window.location.hash);
                 if (blocks.length) blocks[0].scrollIntoView({ block: 'start', behavior: 'instant' });
