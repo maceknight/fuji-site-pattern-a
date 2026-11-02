@@ -927,6 +927,7 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 /* ── ヘッダー「製品」のメニュー（先方の要望 2026-11-01）──
    「製品」にカーソルを乗せると、そのすぐ下にパネルが出て、商品のくくり（6つ）が写真つきで3列×2段に並ぶ。
    くくりの写真の下には、そこに入る大分類を全部並べる（先方の要望。写真は高さを抑えて横長に）。
+   くくりは見出しで押せない。押せるのは大分類だけで、→ を付けて目立たせる（先方の要望 2026-11-02）。
    最初は画面の左端から横一列に並べていたが、「製品」（右側）から遠く使いづらかったので、
    パネルの右端をヘッダーの文字の右端にそろえ、「製品」の真下あたりに収める。
    「製品」の項目をヘッダーの上下いっぱいまでのばし、パネルへカーソルを動かす途中で閉じないようにしている */
@@ -958,28 +959,30 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 .nav-links .nav-mega-item { display: block; color: rgba(250,249,247,0.82); letter-spacing: 0; }
 .nav-mega-item img {
     display: block; width: 100%; height: auto; aspect-ratio: 2.2 / 1; object-fit: cover;
-    opacity: .85; transition: opacity .2s;
 }
 .nav-mega-name {
     display: block; margin-top: 8px;
     font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; letter-spacing: 0.06em;
 }
 .nav-mega-count { display: block; margin-top: 1px; font-size: 10px; letter-spacing: 0.1em; color: rgba(250,249,247,0.45); }
-.nav-links .nav-mega-item:hover,
-.nav-links .nav-mega-item:focus-visible { color: var(--warm); }
-.nav-mega-item:hover img,
-.nav-mega-item:focus-visible img { opacity: 1; }
 .nav-mega-cats {
     list-style: none; margin-top: 6px; padding-top: 6px;
     border-top: 1px solid rgba(200,184,154,0.12);
 }
 .nav-links .nav-mega-cats a {
-    display: block; padding: 1px 0; line-height: 1.35;
+    display: block; padding: 2px 0; line-height: 1.35;
     font-family: 'Cormorant Garamond', serif; font-size: 13px; letter-spacing: 0.04em;
-    color: rgba(250,249,247,0.6);
+    color: rgba(250,249,247,0.85);
 }
 .nav-links .nav-mega-cats a:hover,
 .nav-links .nav-mega-cats a:focus-visible { color: var(--warm); }
+.nav-mega-arrow {
+    display: inline-block; margin-left: 6px;
+    font-family: sans-serif; font-size: 11px; color: var(--warm);
+    transition: transform .2s;
+}
+.nav-mega-cats a:hover .nav-mega-arrow,
+.nav-mega-cats a:focus-visible .nav-mega-arrow { transform: translateX(3px); }
 .nav-links .nav-mega-all {
     display: block; margin-top: 14px; padding-top: 12px; text-align: right;
     border-top: 1px solid rgba(200,184,154,0.12);
