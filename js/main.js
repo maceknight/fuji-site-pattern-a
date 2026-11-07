@@ -50,6 +50,23 @@
         return block && block.classList.contains('cat-block') ? [block] : [];
     }
 
+    // 「製品」メニューの写真は、ヘッダーにカーソルかフォーカスが来たときに読む。
+    // 隠れたパネルは loading="lazy" でも読まれてしまい、全ページで余分な通信になっていた
+    function initNavMegaImages() {
+        var nav = document.querySelector('.site-nav');
+        if (!nav || !nav.querySelector('img[data-mega-src]')) return;
+        var load = function () {
+            nav.removeEventListener('pointerover', load);
+            nav.removeEventListener('focusin', load);
+            nav.querySelectorAll('img[data-mega-src]').forEach(function (img) {
+                img.src = img.getAttribute('data-mega-src');
+                img.removeAttribute('data-mega-src');
+            });
+        };
+        nav.addEventListener('pointerover', load);
+        nav.addEventListener('focusin', load);
+    }
+
     function initNavCategoryLinks() {
         var mega   = document.querySelector('.nav-has-mega');
         var toggle = document.getElementById('navToggle');
@@ -888,5 +905,6 @@
         initProductSearch();
         initRelated();
         initAboutSubnav();
+        initNavMegaImages();
     });
 })();
