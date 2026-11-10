@@ -623,6 +623,10 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 .pva-opt { flex-wrap: wrap; row-gap: 0; }
 .pva-text { word-break: keep-all; overflow-wrap: anywhere; }
 .pva-mark { white-space: nowrap; }
+/* 色の名前が長いと途中で折り返すとの報告（2026-11-10）で、文字を 11→10px、品番を 10→9px にし、
+   余白も少し詰めた。PC では色の名前が途中で切れることはなくなる（品番だけ次の行へ送るものは残る） */
+.pva:not(.pva--buttons-b) .pva-opt { font-size: 10px; gap: 4px; padding: 4px 8px; }
+.pva:not(.pva--buttons-b) .pva-mark { font-size: 9px; letter-spacing: -.02em; }
 .pva-opt:hover { border-color: var(--stone); }
 .pva-opt[aria-pressed="true"] { border-color: var(--ink); background: var(--paper-dark); box-shadow: inset 0 0 0 1px var(--ink); }
 .pva-opt:disabled { background: #ece9e3; color: #aaa49b; border-color: #e0dbd2; cursor: not-allowed; box-shadow: none; }
