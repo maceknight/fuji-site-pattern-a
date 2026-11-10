@@ -238,7 +238,8 @@ footer {
     white-space: normal; word-break: normal; overflow-wrap: normal;
     line-height: 1.5; text-align: center;
 }
-.pd-size-rowlabel { color: var(--stone); font-size: 11px; text-align: left; white-space: nowrap; min-width: 0; }
+/* 行の見出しは 76px の列に収める。「上代（テラゾーカラー）」のような長い見出しが隣の金額に食い込んでいたので、折り返す（先方の指摘 2026-11-10） */
+.pd-size-rowlabel { color: var(--stone); font-size: 11px; text-align: left; white-space: normal; overflow-wrap: anywhere; line-height: 1.35; min-width: 0; }
 .pd-size-val {
     text-align: center; color: var(--ink); font-weight: 400;
     font-variant-numeric: tabular-nums; letter-spacing: .02em;
@@ -1026,4 +1027,45 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
     font-family: 'Cormorant Garamond', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', serif;
     font-weight: 400; letter-spacing: 0.01em; line-height: 1.15;
     font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1;
+}
+
+/* ── 印刷（商品ページを紙・PDF で確認するため。2026-11-10）──
+   画面の見た目は変えない。メニュー・フッター・関連商品・ボタン類を消し、
+   写真と仕様だけにする。サブ画像は全部並べ、ラインナップ表は「詳しく見る」を開いた状態にする。
+   tools/print_products.mjs はこの指定で全商品を 1 冊の PDF にする。 */
+@media print {
+    @page { size: A4 portrait; margin: 10mm 10mm 12mm; }
+    html, body { background: #fff !important; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .site-nav, .nav-drawer, footer, .pd-cta, .pd-cases-section, .pd-lightbox,
+    .pd-help-btn, .pva-reset, .pd-size-toggle, .pd-scroll-btn, .pva-switch { display: none !important; }
+    .page-body { padding-top: 0 !important; padding-bottom: 0 !important; margin-bottom: 0 !important; min-height: 0 !important; }
+    /* 最後の要素の下の余白だけが次のページにこぼれて白紙が出るのを防ぐ */
+    .pd-main, .pd-info, .pd-info > :last-child, .pd-info > :last-child > :last-child { margin-bottom: 0 !important; padding-bottom: 0 !important; }
+    .pd-breadcrumb { padding: 0 0 6px !important; }
+    /* 写真は左 36%、情報は右。grid のままだと Chrome がページの途中で分けられず、
+       下に大きな余白が出たり見出しだけ前のページに残ったりするので、印刷では float にする */
+    .pd-main { display: block !important; }
+    .pd-main::after { content: ''; display: block; clear: both; }
+    .pd-gallery { float: left; width: 36% !important; position: static !important; padding: 0 12px 0 0 !important; max-width: none !important; }
+    /* 情報欄の縦並び flex も、ラインナップ表を含むと分けられなくなるので block にする */
+    .pd-info { display: block !important; margin-left: 36%; border-left: none !important; }
+    .pd-gallery-main, .pd-gallery-thumbs-wrap { max-width: none !important; }
+    .pd-gallery-thumbs-wrap { display: block !important; }
+    .pd-gallery-thumbs { flex-wrap: wrap !important; overflow: visible !important; justify-content: flex-start; gap: 6px !important; }
+    .pd-gallery-thumb { width: 31% !important; height: auto !important; aspect-ratio: 1 / 1; border-color: transparent !important; }
+    .pd-gallery-thumb img { object-fit: contain !important; background: #fff; }
+    .pd-info { padding: 0 0 0 14px !important; }
+    /* ラインナップ：横スクロールさせず、詳しい行も出す */
+    .pd-size-wrap { overflow: visible !important; }
+    .pd-size-grid { font-size: 10px !important; }
+    .pd-size-cell { min-width: 0 !important; padding: 4px 2px !important; }
+    /* 9種類ある SEG でも紙の幅に収まるように、品番・上代も折り返してよいことにする
+       （列の幅は tools/print_products.mjs が minmax(0, 1fr) に書き換える） */
+    .pd-size-grid { font-size: 9.5px !important; }
+    .pd-size-val { white-space: normal !important; overflow-wrap: anywhere; }
+    .pd-size-detail-accordion { grid-template-rows: 1fr !important; }
+    .pd-size-detail-inner { overflow: visible !important; }
+    .pd-spec-row, .pva-step, .pd-custom-options-group, .pd-price-box { break-inside: avoid; }
+    a { color: inherit !important; text-decoration: none !important; }
 }
