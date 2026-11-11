@@ -571,6 +571,48 @@
             try { return JSON.parse(json || '[]') || []; } catch (e) { return []; }
         }
 
+        // 画像をクリックで原寸に拡大／もう一度で戻す。拡大中はドラッグかスクロールで動かす（2026-11-11）
+        // ダブルクリックは分かりにくいので使わない。ドラッグした後のクリックでは戻さない
+        var drag = null;   // { fig, x, y, l, t, moved }
+        window.addEventListener('mousemove', function (e) {
+            if (!drag) return;
+            var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+            if (Math.abs(dx) + Math.abs(dy) > 4) drag.moved = true;
+            drag.fig.scrollLeft = drag.l - dx;
+            drag.fig.scrollTop = drag.t - dy;
+        });
+        window.addEventListener('mouseup', function () {
+            if (!drag) return;
+            drag.fig.classList.remove('is-dragging');
+            if (!drag.moved) drag = null;   // 動かしていなければ、続くクリックで戻す
+        });
+        function makeZoomable(fig, img) {
+            img.addEventListener('click', function (e) {
+                if (drag && drag.moved) { drag = null; return; }
+                drag = null;
+                if (fig.classList.contains('is-zoomed')) {
+                    fig.classList.remove('is-zoomed');
+                    img.style.width = '';
+                    return;
+                }
+                var r = img.getBoundingClientRect();
+                var fx = (e.clientX - r.left) / r.width;
+                var fy = (e.clientY - r.top) / r.height;
+                fig.classList.add('is-zoomed');
+                // 原寸（画面に出ている大きさの 1.5 倍より小さいときは 1.5 倍）
+                img.style.width = Math.max(img.naturalWidth, r.width * 1.5) + 'px';
+                fig.scrollLeft = img.offsetWidth * fx - fig.clientWidth / 2;
+                fig.scrollTop = img.offsetHeight * fy - fig.clientHeight / 2;
+                fig.scrollIntoView({ block: 'nearest' });
+            });
+            fig.addEventListener('mousedown', function (e) {
+                if (!fig.classList.contains('is-zoomed') || e.button !== 0) return;
+                e.preventDefault();
+                drag = { fig: fig, x: e.clientX, y: e.clientY, l: fig.scrollLeft, t: fig.scrollTop, moved: false };
+                fig.classList.add('is-dragging');
+            });
+        }
+
         // アプリ型で、連動元の段で選んでいる値の生地ページ
         function selectedFabricPage(btn) {
             var picker = btn.closest('#pdPicker');
@@ -600,12 +642,21 @@
             text.textContent = btn.dataset.helpText || '';
             text.hidden = !btn.dataset.helpText;
             images.innerHTML = '';
-            parse(btn.dataset.helpImages).forEach(function (item) {
+            var helpImages = parse(btn.dataset.helpImages);
+            if (helpImages.length) {
+                var hint = document.createElement('p');
+                hint.className = 'pd-help-zoom-hint';
+                hint.style.gridColumn = '1 / -1';
+                hint.textContent = '画像をクリックすると拡大します（もう一度クリックで戻ります）';
+                images.appendChild(hint);
+            }
+            helpImages.forEach(function (item) {
                 var fig = document.createElement('figure');
                 var img = document.createElement('img');
                 img.src = item.src;
                 img.alt = item.caption || '';
                 fig.appendChild(img);
+                makeZoomable(fig, img);
                 if (item.caption) {
                     var cap = document.createElement('figcaption');
                     cap.textContent = item.caption;

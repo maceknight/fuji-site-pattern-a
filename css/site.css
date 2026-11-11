@@ -598,6 +598,12 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 .pd-help-images figure { margin: 0; }
 .pd-help-images img { display: block; width: 100%; height: auto; max-height: 80vh; object-fit: contain; background: #fff; }
 .pd-help-images figcaption { font-size: 12px; color: var(--stone); margin-top: 6px; text-align: center; }
+/* クリックで拡大（パラソルの図面などが見づらいとの要望 2026-11-11）。拡大中は枠の中でスクロール・ドラッグして動かす */
+.pd-help-zoom-hint { font-size: 11px; color: var(--stone); margin: 0 0 8px; text-align: right; }
+.pd-help-images img { cursor: zoom-in; }
+.pd-help-images figure.is-zoomed { grid-column: 1 / -1; overflow: auto; max-height: 80vh; background: #fff; cursor: grab; }
+.pd-help-images figure.is-zoomed.is-dragging { cursor: grabbing; }
+.pd-help-images figure.is-zoomed img { width: auto; max-width: none; max-height: none; cursor: inherit; }
 
 .pva-step { margin-bottom: 16px; }
 /* 段（①②③…）の境目が分かりにくいので、見出しを色の帯にして、「？ 詳細」は帯の右端に置く（先方の要望） */
