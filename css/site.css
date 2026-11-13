@@ -639,8 +639,15 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 .pva-opt:disabled { background: #ece9e3; color: #aaa49b; border-color: #e0dbd2; cursor: not-allowed; box-shadow: none; }
 .pva-opt:disabled .pva-swatch { opacity: .4; }
 .pva-swatch {
-    width: 16px; height: 16px; border-radius: 3px; flex-shrink: 0; object-fit: cover;
+    width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0; object-fit: cover;
     box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); display: inline-block;
+}
+/* 色の部分は丸に（先方の指定 2026-11-13）。ダブルクリックで開く窓のほうは、どの商品も同じ大きさの正方形 */
+#pdLightbox .pd-lightbox-content { width: calc(min(76vw, 280px) + 40px); min-height: 0; }
+#pdLightbox .pd-lightbox-content img,
+#pdLightbox .pd-lightbox-swatch {
+    width: min(76vw, 280px); height: auto; aspect-ratio: 1 / 1; max-height: none;
+    object-fit: cover; border-radius: 0; margin: 0 auto 12px;
 }
 
 /* 選択肢のボタン（B案用。components/variation-picker.php の $buttonStyle = 'b' で使う）
@@ -669,7 +676,7 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 }
 .pva--buttons-b .pva-opt:disabled:hover { border-color: #d6cfc3; }
 .pva--buttons-b .pva-opt:disabled .pva-swatch { opacity: .35; filter: grayscale(1); }
-.pva--buttons-b .pva-swatch { width: 24px; height: 24px; border-radius: 4px; }
+.pva--buttons-b .pva-swatch { width: 24px; height: 24px; border-radius: 50%; }
 /* 差し替えた写真は色見本や生地の写真なので、切らずに白地に収める */
 .pd-gallery-main.pva-variant { background: #fff; }
 .pd-gallery-main.pva-variant img { object-fit: contain; }
@@ -723,6 +730,15 @@ h1.page-label-bar { margin: 0; font-size: inherit; font-weight: inherit; line-he
 .scroll-thumb--contain.has-brand:not(:has(.product-brand-tag--tall)) > img,
 .product-thumb--contain.has-brand:not(:has(.product-brand-tag--tall)) > img {
     top: 23%; height: 74%;
+}
+/* 2026-11-13 先方の指摘「ブランド品はロゴ回避のためか小さい」：それでもブランドのない枠（86%）より一回り小さく、
+   縦長ロゴ（tesoro）の枠は 63% しかなかった。写真はどれも周りに約 6% の白い余白があるので、
+   写真をブランドのない枠とほぼ同じ大きさ（84%）にし、少し下げる（ロゴは写真の上の白い余白に乗る） */
+.scroll-thumb--contain.has-brand > img,
+.product-thumb--contain.has-brand > img,
+.scroll-thumb--contain.has-brand:not(:has(.product-brand-tag--tall)) > img,
+.product-thumb--contain.has-brand:not(:has(.product-brand-tag--tall)) > img {
+    left: 8%; width: 84%; top: 14%; height: 84%;
 }
 
 /* 縦長のロゴ（tesoro）：横長前提の枠だと高さで縮んで豆粒になり、枠の中央に寄って位置もずれていた。
