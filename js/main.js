@@ -400,6 +400,16 @@
         var thumbs = Array.prototype.slice.call(document.querySelectorAll('.pd-gallery-thumb'));
 
         thumbs.forEach(function (thumb, index) {
+            // サブ画像の枠はサムネイル（480px）を出している。大きい画像は、触れそうになった時点で先に読んでおく
+            var preload = function () {
+                if (thumb.dataset.full && !thumb.dataset.preloaded) {
+                    thumb.dataset.preloaded = '1';
+                    new Image().src = thumb.dataset.full;
+                }
+            };
+            thumb.addEventListener('pointerenter', preload);
+            thumb.addEventListener('focus', preload);
+            thumb.addEventListener('touchstart', preload, { passive: true });
             thumb.addEventListener('click', function () {
                 thumbs.forEach(function (t) { t.classList.remove('active'); });
                 thumb.classList.add('active');
@@ -850,7 +860,8 @@
                 if (opt.disabled) return;
                 if (opt.dataset.href) { window.open(opt.dataset.href, '_blank', 'noopener'); return; }
                 if (opt.dataset.img || opt.dataset.color) {
-                    openLightbox(opt.dataset.img, opt.dataset.color, opt.dataset.label);
+                    // 窓は 280px ほどの正方形なので、元画像（最大 1600px）ではなくサムネイルで足りる
+                    openLightbox(opt.dataset.thumb || opt.dataset.img, opt.dataset.color, opt.dataset.label);
                 }
             });
         });
