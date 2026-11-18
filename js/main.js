@@ -738,6 +738,33 @@
         var shownBy = null; // いま左に出している写真の持ち主（.pva-opt）
         // 選んだ値の写真で左のメイン画像を差し替えるか（#pdPicker の data-swap-image。いまは先方の要望で止めている）
         var swapMain = picker.dataset.swapImage === '1';
+        // 「この製品について問い合わせる」リンクに選択中のバリエーションを引き継ぐ
+        var cta = document.querySelector('.pd-cta');
+        var ctaBaseHref = cta ? cta.getAttribute('href') : '';
+
+        function updateInquiryLink() {
+            if (!cta || !ctaBaseHref) return;
+            var chosen = [];
+            steps.forEach(function (s) {
+                if (s.hidden) return;
+                var sel = selected(s);
+                if (!sel) return;
+                var gName = (s.dataset.groupName || '').trim();
+                var vLabel = (sel.dataset.label || '').trim();
+                if (!vLabel) return;
+                chosen.push(gName ? gName + '：' + vLabel : vLabel);
+            });
+            if (!chosen.length) {
+                cta.setAttribute('href', ctaBaseHref);
+                return;
+            }
+            var parts = ctaBaseHref.split('?');
+            var params = new URLSearchParams(parts[1] || '');
+            var baseItem = params.get('item') || '';
+            var nextItem = baseItem ? baseItem + '（' + chosen.join('／') + '）' : chosen.join('／');
+            params.set('item', nextItem);
+            cta.setAttribute('href', parts[0] + '?' + params.toString());
+        }
 
         function tagsOf(opt) {
             try { return JSON.parse(opt.dataset.tags || '[]'); } catch (e) { return []; }
@@ -837,6 +864,7 @@
                 if (!hideStep) n++;
             });
             if (swapMain) refreshMain();
+            updateInquiryLink();
             if (summary) {
                 var picks = steps.filter(function (s) { return !s.hidden; }).map(selected)
                     .filter(Boolean).map(function (o) { return o.dataset.label; });

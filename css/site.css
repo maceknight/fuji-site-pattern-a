@@ -207,8 +207,11 @@ footer {
 .brand-header-row {
     display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
 }
+.brand-header-heading {
+    margin: 0; line-height: 0; flex-shrink: 0;
+}
 .brand-header-logo {
-    height: 48px; width: auto; max-width: 220px; object-fit: contain; flex-shrink: 0;
+    display: block; height: 48px; width: auto; max-width: 220px; object-fit: contain; flex-shrink: 0;
 }
 .brand-header-desc {
     font-size: 13px; color: var(--stone); line-height: 1.9; margin: 0;
@@ -243,9 +246,29 @@ footer {
 .pd-size-val {
     text-align: center; color: var(--ink); font-weight: 400;
     font-variant-numeric: tabular-nums; letter-spacing: .02em;
+    white-space: nowrap;
 }
 .pd-size-val.is-partno { font-weight: 600; white-space: nowrap; }
 .pd-size-val.is-price { color: var(--ink); font-weight: 500; white-space: nowrap; }
+/* 列が多いラインナップ表（8列以上：SEG 9列・Jumbrella 10列など）は余白と文字をわずかに詰め、
+   PC全画面で不要な横スクロールバーが出ないようにする。スマホでは読みやすい大きさを保ち横スクロール */
+@media screen {
+    .pd-size-grid--wide { font-size: 12px; }
+    .pd-size-grid--wide .pd-size-cell { padding: 7px 4px; min-width: 0; }
+    .pd-size-grid--wide .pd-size-rowlabel { font-size: 10.5px; }
+    .pd-size-grid--wide .pd-size-val { letter-spacing: 0; }
+    .pd-size-grid--compact {
+        font-size: 11px;
+        grid-template-columns: 54px repeat(var(--pd-cols), minmax(min-content, 1fr)) !important;
+    }
+    .pd-size-grid--compact .pd-size-cell { padding: 7px 3px; }
+}
+@media screen and (max-width: 768px) {
+    .pd-size-grid--wide,
+    .pd-size-grid--compact { font-size: 12px; }
+    .pd-size-grid--wide .pd-size-cell,
+    .pd-size-grid--compact .pd-size-cell { padding: 7px 5px; }
+}
 .pd-size-detail-accordion {
     grid-column: 1 / -1;
     display: grid; grid-template-columns: subgrid;
