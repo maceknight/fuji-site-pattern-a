@@ -1,0 +1,151 @@
+.top-preview {
+    --preview-gutter: clamp(24px, 5vw, 76px);
+    --preview-paper: #f5f2ed;
+    --preview-gold: #795c36;
+}
+
+.top-preview .preview-hero { display: grid; position: relative; }
+.top-preview .preview-media { position: relative; overflow: hidden; background: #22201b; }
+.top-preview .preview-media > img,
+.top-preview .preview-media > video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--photo-position, center);
+}
+.top-preview .preview-copy { position: relative; min-width: 0; }
+.top-preview .hero-eyebrow { margin-bottom: 14px; font-size: 11px; }
+.top-preview .hero-title {
+    font-family: "Noto Serif JP", "Yu Mincho", YuMincho, "Hiragino Mincho ProN", serif;
+    font-size: clamp(37px, 4.4vw, 71px);
+    line-height: 1.28;
+    margin-bottom: 18px;
+}
+.top-preview .hero-sub { font-size: 13px; text-wrap: pretty; }
+.top-preview .hero-news { position: relative; inset: auto; width: auto; min-width: 0; }
+.top-preview .hero-news-more { display: block; }
+.top-preview .preview-media-controls {
+    position: absolute;
+    z-index: 2;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: #181613e8;
+    color: #faf9f7;
+    padding: 2px 4px;
+    font-size: 12px;
+}
+.top-preview .preview-media-controls[hidden] { display: none; }
+.top-preview .preview-media-controls button {
+    border: 0;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 8px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+.top-preview .preview-media-controls button:hover,
+.top-preview .preview-media-controls button:focus-visible { background: #ffffff30; }
+
+.top-preview--a .preview-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 350px);
+    min-height: clamp(560px, calc(90svh - 61px), 820px);
+    padding: 90px var(--preview-gutter) clamp(36px, 6vw, 88px);
+    gap: 32px;
+    align-items: end;
+    background: #161512;
+}
+.top-preview--a .preview-media { position: absolute; inset: 0; }
+.top-preview--a .preview-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(0deg, #13120fee, #13120f5c 43%, transparent 74%),
+                linear-gradient(90deg, #13120f4d, transparent 60%);
+}
+.top-preview--a .preview-media > video { --photo-position: 55% 49%; }
+.top-preview--a .hero-sub { color: #faf9f7; }
+.top-preview--a .hero-news { background: #181613d9; }
+.top-preview--a .hero-news-date { color: #cabfae; }
+
+.top-preview--b .preview-hero,
+.top-preview--c .preview-hero,
+.top-preview--c .preview-scenes,
+.top-preview--c .preview-news-strip { background: var(--preview-paper); }
+.top-preview--b .hero-eyebrow, .top-preview--c .hero-eyebrow,
+.top-preview--b .hero-title em, .top-preview--c .hero-title em { color: var(--preview-gold); }
+.top-preview--b .hero-title, .top-preview--c .hero-title,
+.top-preview--b .hero-sub, .top-preview--c .hero-sub { color: var(--ink); }
+.top-preview--b .hero-news, .top-preview--c .hero-news { background: #23201c; }
+.top-preview--b .hero-news-date, .top-preview--c .hero-news-date { color: #cabfae; }
+
+.top-preview--b .preview-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(235px, 340px);
+    padding: 28px var(--preview-gutter) 48px;
+    gap: 26px 36px;
+    align-items: center;
+}
+.top-preview--b .preview-media {
+    grid-column: 1 / -1;
+    height: clamp(320px, 53svh, 595px);
+}
+.top-preview--b .preview-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 850ms ease;
+}
+.top-preview--b .preview-slide.is-current { opacity: 1; z-index: 1; }
+.top-preview--b .preview-media-controls { top: auto; bottom: 16px; }
+.top-preview--b .hero-title { font-size: clamp(35px, 3.7vw, 60px); }
+
+.top-preview--c .preview-hero {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: center;
+    padding: 32px var(--preview-gutter) 30px;
+    gap: clamp(24px, 4vw, 62px);
+}
+.top-preview--c .preview-copy { grid-column: 1; grid-row: 1; }
+.top-preview--c .preview-media { grid-column: 2; min-height: 320px; aspect-ratio: 4 / 3; }
+.top-preview--c .preview-media > img { position: absolute; inset: 0; --photo-position: 55% 50%; }
+.top-preview--c .preview-scenes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    padding: 0 var(--preview-gutter) 32px;
+}
+.top-preview--c .preview-scenes figure { margin: 0; }
+.top-preview--c .preview-scenes img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.top-preview--c .preview-scenes figcaption { padding-top: 8px; font-size: 13px; color: var(--ink); }
+.top-preview--c .preview-news-strip { padding: 0 var(--preview-gutter) 42px; }
+
+@media (max-width: 768px) {
+    .top-preview .hero-sub { font-size: 12px; letter-spacing: 0.035em; }
+    .top-preview--a .preview-hero,
+    .top-preview--b .preview-hero,
+    .top-preview--c .preview-hero { grid-template-columns: minmax(0, 1fr); }
+    .top-preview--a .preview-hero { padding: 0; gap: 0; min-height: auto; }
+    .top-preview--a .preview-media,
+    .top-preview--a .preview-copy { grid-area: 1 / 1; }
+    .top-preview--a .preview-media { position: relative; height: clamp(425px, 65svh, 570px); }
+    .top-preview--a .preview-copy { padding: 0 var(--preview-gutter) 24px; pointer-events: none; }
+    .top-preview--a .hero-news { margin: 14px var(--preview-gutter) 24px; }
+    .top-preview--b .preview-hero { padding: 14px var(--preview-gutter) 28px; gap: 20px; }
+    .top-preview--b .preview-media { height: clamp(235px, 77vw, 420px); }
+    .top-preview--b .preview-media-controls { bottom: 8px; right: 8px; }
+    .top-preview--c .preview-hero { padding: 30px var(--preview-gutter) 16px; gap: 20px; }
+    .top-preview--c .preview-media { grid-column: 1; min-height: 0; aspect-ratio: 1.06 / 1; }
+    .top-preview--c .preview-scenes { gap: 9px; padding-bottom: 24px; }
+    .top-preview--c .preview-scenes img { aspect-ratio: 1 / 1; }
+    .top-preview--c .preview-scenes figcaption { font-size: 11px; line-height: 1.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .top-preview .preview-slide { transition: none; }
+}
