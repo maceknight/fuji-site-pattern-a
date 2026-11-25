@@ -1,0 +1,231 @@
+/* ============================================================
+   design-lab.css — 見やすさの改善案（Fuji-design-lab、2026-11-25）
+   テストサイトの「改善案」表示（URL に ?design=b）のときだけ読み込む（tools/build_static.php）。
+   本番の PHP 版・site.css は読み込まない。先方が通したブロックだけ site.css へ移し、ここから消す
+   ============================================================ */
+/* design-lab: product-detail-lineup */
+.pd-size-wrap {
+    position: relative;
+    border-top: 1px solid var(--fog);
+}
+.pd-size-rowlabel {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--white);
+    border-right: 1px solid var(--fog);
+    padding-left: 4px;
+    padding-right: 8px;
+}
+.pd-size-val {
+    border-left: 1px solid rgba(206, 197, 180, 0.35);
+}
+.pd-size-val.is-price {
+    background: var(--paper);
+    border-top: 1px solid var(--fog);
+    font-weight: 600;
+}
+.pd-size-rowlabel:has(+ .pd-size-val.is-price) {
+    background: var(--paper);
+    border-top: 1px solid var(--fog);
+    color: var(--ink);
+    font-weight: 500;
+}
+.pd-size-toggle {
+    min-height: 30px;
+    padding: 4px 10px;
+    border: 1px solid var(--fog);
+    border-radius: 2px;
+    background: var(--white);
+    color: var(--ink);
+}
+.pd-size-toggle:hover,
+.pd-size-toggle:focus-visible {
+    border-color: var(--ink);
+    color: var(--ink);
+}
+
+/* design-lab: product-detail-variation */
+.pva:not(.pva--buttons-b) .pva-opts {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 7px;
+}
+.pva:not(.pva--buttons-b) .pva-opt {
+    min-height: 38px;
+    padding: 6px 11px;
+    gap: 6px;
+    font-size: 11.5px;
+    line-height: 1.35;
+}
+.pva:not(.pva--buttons-b) .pva-mark {
+    font-size: 10px;
+}
+.pva:not(.pva--buttons-b) .pva-opt[aria-pressed="true"] {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--white);
+    font-weight: 500;
+    box-shadow: none;
+}
+.pva:not(.pva--buttons-b) .pva-opt[aria-pressed="true"] .pva-mark {
+    color: var(--warm);
+}
+.pva:not(.pva--buttons-b) .pva-opt[aria-pressed="true"] .pva-swatch {
+    box-shadow: 0 0 0 1.5px #fff;
+}
+.pva:not(.pva--buttons-b) .pva-opt:disabled {
+    border-style: dashed;
+}
+.pva-opt:focus-visible,
+.pd-help-btn:focus-visible,
+.pva-reset:focus-visible,
+.pd-size-toggle:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+@media (max-width: 768px) {
+    .pva:not(.pva--buttons-b) .pva-opts {
+        grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+        gap: 8px;
+    }
+    .pva:not(.pva--buttons-b) .pva-opt {
+        min-height: 44px;
+        padding: 7px 12px;
+        font-size: 12px;
+    }
+    .pva-step {
+        margin-bottom: 14px;
+    }
+}
+
+/* design-lab: product-detail-mobile-rhythm */
+@media (max-width: 768px) {
+    .pd-gallery {
+        max-width: 100%;
+        padding: 16px 16px 14px;
+    }
+    .pd-gallery-main {
+        max-height: 290px;
+        width: auto;
+        max-width: 100%;
+        margin: 0 auto 10px;
+        background: var(--white);
+    }
+    .pd-gallery-main img {
+        object-fit: contain;
+    }
+    .pd-info {
+        padding: 18px 16px 36px;
+    }
+    .pd-desc {
+        padding: 12px 14px;
+        line-height: 1.85;
+        margin-bottom: 20px;
+    }
+    .pd-spec-key {
+        width: 104px;
+    }
+    .pd-spec-val {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* design-lab: products-category-header */
+.cat-title-row {
+    transition: background-color 0.15s ease;
+}
+.cat-title-row:hover {
+    background-color: rgba(200, 184, 154, 0.1);
+}
+.cat-block.expanded > .cat-title-row {
+    border-left: 3px solid var(--warm);
+    padding-left: 45px;
+}
+.cat-meta .cat-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--fog);
+    border-radius: 2px;
+    background: var(--white);
+    font-size: 9px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.cat-block.expanded .cat-meta .cat-arrow {
+    transform: rotate(180deg);
+    border-color: var(--warm);
+}
+.cat-title-row:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: -2px;
+}
+@media (max-width: 768px) {
+    .cat-title-row {
+        min-height: 52px;
+    }
+    .cat-block.expanded > .cat-title-row {
+        padding-left: 21px;
+    }
+    .products-search input,
+    .products-search select,
+    .products-search button {
+        min-height: 44px;
+    }
+    .filter-toggle {
+        min-height: 40px;
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+/* design-lab: products-card-readability */
+.scroll-label {
+    color: var(--ink);
+    font-size: 11.5px;
+    line-height: 1.45;
+}
+.product-info {
+    background: #626268;
+}
+
+/* design-lab: top-hero-fold */
+.hero {
+    height: calc(82vh - 61px);
+    min-height: 520px;
+    max-height: 760px;
+}
+@media (max-width: 768px) {
+    .hero {
+        height: calc(86vh - 57px);
+        min-height: 540px;
+    }
+}
+
+/* design-lab: top-intro-contrast */
+.intro-label {
+    color: #4d453b;
+}
+.intro-body {
+    color: var(--ink);
+    border-left-width: 2px;
+}
+
+/* design-lab: top-strengths-contrast */
+.strength-num {
+    font-variant-numeric: lining-nums;
+    font-feature-settings: "lnum" 1;
+}
+.strength-title {
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    line-height: 1.6;
+}
+.strength-body {
+    font-size: 12.5px;
+    color: rgba(245, 242, 237, 0.84);
+    line-height: 1.95;
+}

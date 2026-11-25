@@ -137,6 +137,9 @@
 
     function toQuery(c) {
         var qs = new URLSearchParams();
+        // 改善案の表示（?design=b、tools/build_static.php）は検索しても残す
+        var design = new URLSearchParams(location.search).get('design');
+        if (design) qs.set('design', design);
         if (c.q) qs.set('q', c.q);
         if (c.cat) qs.set('cat', c.cat);
         Object.keys(c.ranges).forEach(function (key) {
@@ -164,6 +167,7 @@
 
     // URL に条件があれば（?q=…&cat=… など）、フォームに戻してから検索する
     var params = new URLSearchParams(location.search);
+    params.delete('design');
     if (params.toString()) {
         var q = form.querySelector('[name="q"]');
         var cat = form.querySelector('#searchCat');
