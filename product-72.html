@@ -390,7 +390,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // ページを移っても改善案のまま
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href]');
-      if (!a || /^(#|mailto:|tel:|javascript:)/.test(a.getAttribute('href'))) return;
+      // 右下の切り替え（現行へ戻るリンク）は書き換えない
+      if (!a || a.closest('#designSwitch') || /^(#|mailto:|tel:|javascript:)/.test(a.getAttribute('href'))) return;
       var h = withDesign(a.href, true);
       if (h) a.href = h;
     }, true);
