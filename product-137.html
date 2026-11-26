@@ -22,9 +22,14 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"TOP","item":"index.php"},{"@type":"ListItem","position":2,"name":"製品","item":"products.php"},{"@type":"ListItem","position":3,"name":"[R]Side Sofa","item":"product.php?id=137"}]}</script>
 <script>
 (function () {
-  if (!/[?&]design=b(&|$)/.test(location.search)) return;
-  document.documentElement.classList.add('design-b');
-  document.write('<link rel="stylesheet" href="css/design-lab.css">');
+  var m = /[?&]design=(b|bold)(&|$)/.exec(location.search);
+  if (!m) return;
+  document.documentElement.classList.add('design-' + m[1]);
+  // （<link> を文字列で書くと書き出しのリンク確認に引っかかるので、要素で足す）
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = 'css/' + (m[1] === 'b' ? 'design-lab' : 'design-bold') + '.css';
+  document.head.appendChild(link);
 })();
 </script>
 </head>
@@ -907,39 +912,66 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 <script>
 (function () {
-  var isB = /[?&]design=b(&|$)/.test(location.search);
-  function withDesign(href, on) {
+  var m = /[?&]design=(b|bold)(&|$)/.exec(location.search);
+  var cur = m ? m[1] : '';
+  function withDesign(href, val) {
     var u = new URL(href, location.href);
     if (u.origin !== location.origin || !/\.html$|\/$/.test(u.pathname)) return null;
-    if (on) u.searchParams.set('design', 'b'); else u.searchParams.delete('design');
+    if (val) u.searchParams.set('design', val); else u.searchParams.delete('design');
     return u.href;
   }
-  if (isB) {
-    // ページを移っても改善案のまま
+  if (cur) {
+    // ページを移っても同じ案のまま
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href]');
       // 右下の切り替え（現行へ戻るリンク）は書き換えない
       if (!a || a.closest('#designSwitch') || /^(#|mailto:|tel:|javascript:)/.test(a.getAttribute('href'))) return;
-      var h = withDesign(a.href, true);
+      var h = withDesign(a.href, cur);
       if (h) a.href = h;
     }, true);
     var open = window.open;
     window.open = function (url) {
       var args = Array.prototype.slice.call(arguments);
-      if (url) args[0] = withDesign(url, true) || url;
+      if (url) args[0] = withDesign(url, cur) || url;
       return open.apply(window, args);
     };
+  }
+  if (cur === 'bold') {
+    // 思いっきり版で足す部品（本番では index.php / products.php に書く。docs の markup-changes を参照）。
+    // main.js は defer なので、ここ（本文の最後）で足せば main.js より先に入る
+    var sub = document.querySelector('.hero-content .hero-sub');
+    if (sub) sub.insertAdjacentHTML('afterend', '<div class="hero-actions">'
+      + '<a class="hero-btn hero-btn--primary" href="products.html">製品一覧を見る →</a>'
+      + '<a class="hero-btn hero-btn--ghost" href="catalog.html">WEBカタログ</a></div>');
+    var form = document.querySelector('.products-header #productSearch');
+    if (form) {
+      var jumps = [['parasol-and-market-umbrella', 'Parasol ＆ Base'], ['dining-chair', 'Chair'],
+        ['lounge-chair-and-sofa', 'Sofa ＆ Lounge'], ['dining-table', 'Table'], ['bench', 'Bench'],
+        ['eye-catch-item', 'Eye-catch ＆ Other']].filter(function (j) { return document.getElementById('cat-' + j[0]); });
+      var legend = [['#F97316', '受注生産品'], ['#047857', '在庫品'], ['#A3E635', '限定品']];
+      form.insertAdjacentHTML('afterend', '<div class="products-toolbar">'
+        + '<nav class="products-jump" aria-label="カテゴリへ移動"><span class="products-jump-label">カテゴリ移動：</span>'
+        + jumps.map(function (j) { return '<a href="#cat-' + j[0] + '">' + j[1] + '</a>'; }).join('') + '</nav>'
+        + '<div class="products-legend" aria-label="在庫区分の凡例">'
+        + legend.map(function (l) { return '<span class="products-legend-item"><i class="products-legend-dot" style="background:' + l[0] + '" aria-hidden="true"></i>' + l[1] + '</span>'; }).join('')
+        + '</div></div>');
+    }
+    var picker = document.getElementById('pdPicker');
+    if (picker && !document.getElementById('pdPickerSummary')) {
+      picker.insertAdjacentHTML('afterbegin', '<p class="pva-summary pva-summary--bar" id="pdPickerSummary" aria-live="polite">'
+        + '未選択（各段から選ぶと、お問い合わせに引き継がれます）</p>');
+    }
   }
   document.addEventListener('DOMContentLoaded', function () {
     var box = document.createElement('div');
     box.id = 'designSwitch';
     box.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:3000;display:flex;border:1px solid #c8b89a;'
       + "font:11px/1 'Noto Sans JP',sans-serif;letter-spacing:.06em;background:#1a1a18;opacity:.94;";
-    [['現行', false], ['改善案', true]].forEach(function (d) {
+    [['現行', ''], ['改善案', 'b'], ['思いっきり版', 'bold']].forEach(function (d) {
       var a = document.createElement('a');
       a.textContent = d[0];
       a.href = withDesign(location.href, d[1]);
-      var on = d[1] === isB;
+      var on = d[1] === cur;
       a.style.cssText = 'padding:9px 14px;text-decoration:none;' + (on ? 'background:#c8b89a;color:#1a1a18;' : 'color:#c8b89a;');
       if (on) a.setAttribute('aria-current', 'true');
       box.appendChild(a);
