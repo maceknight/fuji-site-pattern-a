@@ -146,6 +146,14 @@ footer {
 /* TOP の商品代表カード（カテゴリ） */
 .hp-product-img-photo { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+/* メインビジュアルの写真が2枚以上のとき：重ねて置き、main.js が is-active を移してクロスフェードする。
+   濃さは .hero-video（mockup-style.css）の 0.45 にそろえる */
+.hero-slide { opacity: 0; transition: opacity 1.8s ease-in-out; }
+.hero-slide.is-active { opacity: 0.45; }
+@media (prefers-reduced-motion: reduce) {
+    .hero-slide { transition: none; }
+}
+
 /* 背景が静止画のときのコピー可読性確保。
    元テーマは暗い動画が前提だったため、明るい写真だと白文字が沈む。 */
 .hero-scrim {

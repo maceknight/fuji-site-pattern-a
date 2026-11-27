@@ -1139,7 +1139,29 @@
         }, { passive: true });
     }
 
+    /* --------------------------------------------------------
+       TOPのメインビジュアル：写真が2枚以上なら順にクロスフェード
+       （写真の一覧は config/content.php の heroSlides()）。
+       動きを減らす設定の人には切り替えない。タブが裏にある間は止める。
+    -------------------------------------------------------- */
+    function initHeroSlides() {
+        var slides = document.querySelectorAll('.hero .hero-slide');
+        if (slides.length < 2) return;
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var index = 0;
+        setInterval(function () {
+            if (document.hidden) return;
+            var next = (index + 1) % slides.length;
+            // 次の写真がまだ読み込めていなければ、今の写真のまま待つ
+            if (!slides[next].complete) return;
+            slides[index].classList.remove('is-active');
+            slides[next].classList.add('is-active');
+            index = next;
+        }, 7000);
+    }
+
     ready(function () {
+        initHeroSlides();
         initNav();
         initNavCategoryLinks();
         initCategoryBlocks();
