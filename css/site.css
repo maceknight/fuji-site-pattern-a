@@ -146,23 +146,43 @@ footer {
 /* TOP の商品代表カード（カテゴリ） */
 .hp-product-img-photo { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* メインビジュアルの写真が2枚以上のとき：重ねて置き、main.js が is-active を移してクロスフェードする。
-   濃さは .hero-video（mockup-style.css）の 0.45 にそろえる */
-.hero-slide { opacity: 0; transition: opacity 1.8s ease-in-out; }
-.hero-slide.is-active { opacity: 0.45; }
+/* メインビジュアルの写真の濃さ。元テーマ（mockup-style.css）の 0.45 だと、
+   先方の明るい写真（2026-11-27 の吊り下げチェアのテラス）が夕方のような灰色になるので 0.8 にする。
+   文字の読みやすさは、下の .hero-scrim を文字の乗る左と下だけにかけて保つ */
+.hero img.hero-video { opacity: 0.8; }
+
+/* 写真が2枚以上のとき：重ねて置き、main.js が is-active を移してクロスフェードする */
+.hero img.hero-slide { opacity: 0; transition: opacity 1.8s ease-in-out; }
+.hero img.hero-slide.is-active { opacity: 0.8; }
 @media (prefers-reduced-motion: reduce) {
-    .hero-slide { transition: none; }
+    .hero img.hero-slide { transition: none; }
 }
 
 /* 背景が静止画のときのコピー可読性確保。
-   元テーマは暗い動画が前提だったため、明るい写真だと白文字が沈む。 */
+   元テーマは暗い動画が前提だったため、明るい写真だと白文字が沈む。
+   写真全体は暗くせず、見出しが乗る左側と、文字・お知らせが乗る下側だけを暗くする（2026-11-27） */
 .hero-scrim {
     position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background: linear-gradient(to top,
-        rgba(12,12,10,0.88) 0%,
-        rgba(12,12,10,0.55) 42%,
-        rgba(12,12,10,0.30) 100%);
+    background:
+        linear-gradient(to right,
+            rgba(12,12,10,0.70) 0%,
+            rgba(12,12,10,0.35) 45%,
+            rgba(12,12,10,0) 70%),
+        linear-gradient(to top,
+            rgba(12,12,10,0.65) 0%,
+            rgba(12,12,10,0) 45%);
 }
+/* スマホは見出しが横幅いっぱいに乗るので、左だけでは足りない。文字の高さ全体を一様に暗くする */
+@media (max-width: 768px) {
+    .hero-scrim {
+        background: linear-gradient(to top,
+            rgba(12,12,10,0.80) 0%,
+            rgba(12,12,10,0.60) 55%,
+            rgba(12,12,10,0.15) 100%);
+    }
+}
+/* 元テーマの淡い光（.hero-light）は、明るい写真の上では白っぽい濁りになるので出さない */
+.hero-light { display: none; }
 
 /* ── 商品一覧ページ ─────────────────────────── */
 .cat-sub-block { padding: 0 24px 24px 44px; }
